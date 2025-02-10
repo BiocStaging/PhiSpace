@@ -1,12 +1,34 @@
 ---
-title: "Getting Started with PhiSpace"
+title: "Getting Started: mapping scRNA-seq to bulk RNA-seq atlas"
 author: "Jiadong Mao"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Getting Started with PhiSpace}
+  %\VignetteIndexEntry{Getting Started: mapping scRNA-seq to bulk RNA-seq atlas}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-test
+In this example, 
+
+Load the packages.
+```{r}
+# Name of the game
+suppressPackageStartupMessages(library(PhiSpace))
+# Tidyverse packages
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(magrittr))
+suppressPackageStartupMessages(library(ggpubr))
+suppressPackageStartupMessages(library(tidyr))
+# Other utils
+suppressPackageStartupMessages(library(ComplexHeatmap)) # plot heatmap
+suppressPackageStartupMessages(library(zeallot)) # use operator %<-%
+suppressPackageStartupMessages(library(plotly)) # plot 3d interative plots
+```
+
+Download the processed reference dataset [ref_dc.rds](https://www.dropbox.com/scl/fi/xiqb8fr2se5go6n17jvj0/ref_dc.rds?rlkey=uhxaazcyej30geu8fu8jclxpn&st=pocmrvx6&dl=0).
+
+
+
+
