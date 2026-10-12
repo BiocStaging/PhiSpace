@@ -801,7 +801,7 @@ Build the website with the scripts in `WEBSITE.md`, not with
 - **R >= 4.5.0**
 - **Bioconductor**: SummarizedExperiment, SingleCellExperiment, SpatialExperiment, scran, scuttle, S4Vectors, ComplexHeatmap
 - **CRAN**: Matrix, ggplot2, ggpubr, dplyr, plyr, magrittr, irlba, FNN, cluster, umap, kerndwd
-- **GitHub**: vizOmics (ByronSyun/vizOmics)
+- **Website only**: vizOmics (GitHub, ByronSyun/vizOmics), loaded by six vignettes and installed by the website workflow. The package itself stopped importing it on 2026-10-12 (Bioconductor allows only CRAN and Bioconductor dependencies); its code never called it.
 
 ## Testing
 

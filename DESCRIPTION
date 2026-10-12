@@ -33,14 +33,11 @@ Imports:
     FNN,
     S4Vectors,
     kerndwd,
-    umap,
-    vizOmics
+    umap
 Suggests: 
     cluster,
     pls,
     testthat (>= 3.0.0)
-Remotes: 
-    ByronSyun/vizOmics
 Config/testthat/edition: 3
 URL: https://mao-lab-org.github.io/PhiSpace/, https://github.com/mao-lab-org/PhiSpace
 BugReports: https://github.com/mao-lab-org/PhiSpace/issues
