@@ -61,16 +61,15 @@ jobs:
           rcmdcheck::rcmdcheck(tarball, args = "--no-manual",
                                check_dir = ".", error_on = "warning")
 
-      # --no-check-bioc-help skips the support-site and bioc-devel checks.
-      # Remove it once the maintainer is registered on support.bioconductor.org
-      # and subscribed to bioc-devel.
+      # The support-site check needs the maintainer email registered on
+      # support.bioconductor.org with PhiSpace in its watched tags. The
+      # bioc-devel check needs a Bioconductor password and only prints a note.
       - name: BiocCheck
         shell: Rscript {0}
         run: |
           setwd("/tmp/check")
           tarball <- list.files(pattern = "^PhiSpace_.*\\.tar\\.gz$")
-          res <- BiocCheck::BiocCheck(tarball, `new-package` = TRUE,
-                                      `no-check-bioc-help` = TRUE)
+          res <- BiocCheck::BiocCheck(tarball, `new-package` = TRUE)
           if (res$getNum("error") + res$getNum("warning") > 0)
               stop("BiocCheck found ERRORs or WARNINGs")
 

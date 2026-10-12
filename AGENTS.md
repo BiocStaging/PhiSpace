@@ -447,8 +447,9 @@ Done on 2026-10-07 with this procedure:
   BiocCheckGitClone, R CMD build, R CMD check and BiocCheck (new package) in
   the `bioconductor/bioconductor_docker:devel` image, on pushes to `main`,
   pull requests, manual dispatch and every Monday, and fails on any ERROR or
-  WARNING. BiocCheck skips the support-site and bioc-devel checks
-  (`no-check-bioc-help`) until the maintainer has registered. The first local
+  WARNING. BiocCheck also checks that the maintainer email is registered on
+  support.bioconductor.org and watches the PhiSpace tag (done 2026-10-13); an
+  unreachable support site gives a WARNING, so rerun the job. The first local
   run found that scuttle and scran in Bioconductor 3.24 deprecate
   `logNormCounts()` and `findMarkers()`; see `logNormTransf()` and the
   `scoreCells()` default.
