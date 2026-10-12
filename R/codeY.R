@@ -14,10 +14,10 @@ codeY <- function(sce, phenotypes, method = c("-1,1", "0,1")){
 
   YY <- vector("list", length(phenotypes))
 
-  for(phIdx in 1:length(phenotypes)){
+  for(phIdx in seq_along(phenotypes)){
     ph <- phenotypes[phIdx]
     labs <- unique(as.character(colData(sce)[,ph]))
-    YY_temp <- vapply(1:length(labs),
+    YY_temp <- vapply(seq_along(labs),
                       function(x){
                         lab <- labs[x]
                         out <- as.numeric(colData(sce)[,ph] == lab)
@@ -52,7 +52,7 @@ codeY_vec <- function(vec, rowNames = NULL, method = c("-1,1", "0,1")){
 
   labs <- levels(vec)
   YY <- vapply(
-    1:length(labs),
+    seq_along(labs),
     function(x){
       lab <- labs[x]
       out <- as.numeric(vec == lab)

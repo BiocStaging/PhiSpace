@@ -77,7 +77,7 @@ plotPhiSpaceHeatMap <- function(PhiSpaceScore,
     rowSplit <- plot_dat$label
   }
 
-  ComplexHeatmap::Heatmap(as.matrix(plot_dat[,1:length(refLvls)]),
+  ComplexHeatmap::Heatmap(as.matrix(plot_dat[,seq_along(refLvls)]),
                           cluster_columns = cluster_columns,
                           cluster_rows = cluster_rows,
                           show_row_names = show_row_names,

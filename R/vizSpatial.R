@@ -217,7 +217,7 @@ VizSpatial <- function(
 
     if(is.null(coordNames)){
       warning("Coordinate names nonexistent; will use generic names.")
-      coordNames <- paste0("coord", 1:length(coordNames))
+      coordNames <- paste0("coord", seq_along(coordNames))
       spatialCoordsNames(obj) <- coordNames
     }
 

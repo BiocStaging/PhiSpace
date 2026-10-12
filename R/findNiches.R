@@ -174,8 +174,8 @@ findNiches <- function(spe,
 
     # Create niche labels
     niche_labels <- factor(cluster_result$cluster,
-                           levels = 1:k,
-                           labels = paste0("Niche_", 1:k))
+                           levels = seq_len(k),
+                           labels = paste0("Niche_", seq_len(k)))
 
     # Store results
     cluster_results[[as.character(k)]] <- niche_labels

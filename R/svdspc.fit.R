@@ -45,15 +45,15 @@ svdspc.fit <- function (X, Y, ncomp, center = TRUE, scale = FALSE, sparse = FALS
     P <- huhn$v
     dimnames(TT) <- list(
       dnX[[1]],
-      paste0("comp", 1:ncomp)
+      paste0("comp", seq_len(ncomp))
     )
     dimnames(P) <- list(
       dnX[[2]],
-      paste0("comp", 1:ncomp)
+      paste0("comp", seq_len(ncomp))
     )
     tQ <- crossprod(TT, Y)/D^2
     Bcum <- matrix(0, nrow = npred, ncol = nresp)
-    for (a in 1:ncomp) {
+    for (a in seq_len(ncomp)) {
       Bcum <- Bcum + P[, a] %o% tQ[a, ]
       k <- match(a, keepComps)
       if (!is.na(k)) B[, , k] <- Bcum

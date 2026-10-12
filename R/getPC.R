@@ -64,9 +64,9 @@ getPC <- function(X, ncomp, center = TRUE, scale = FALSE, sparse = FALSE){
 
 
   rownames(scores) <- rownames(X)
-  colnames(scores) <- paste0('comp', 1:ncol(scores))
+  colnames(scores) <- paste0('comp', seq_len(ncol(scores)))
   rownames(loadings) <- colnames(X)
-  colnames(loadings) <- paste0('comp', 1:ncol(scores))
+  colnames(loadings) <- paste0('comp', seq_len(ncol(scores)))
 
   return(list(
     scores = scores,
@@ -107,9 +107,9 @@ getPC <- function(X, ncomp, center = TRUE, scale = FALSE, sparse = FALSE){
   accuProps <- cumsum(props)
 
   rownames(scores) <- rownames(X)
-  colnames(scores) <- paste0('comp', 1:ncomp)
+  colnames(scores) <- paste0('comp', seq_len(ncomp))
   rownames(loadings) <- colnames(X)
-  colnames(loadings) <- paste0('comp', 1:ncomp)
+  colnames(loadings) <- paste0('comp', seq_len(ncomp))
 
   return(list(
     scores = scores,

@@ -100,7 +100,7 @@ PhiSpace <- function(
     if(is.null(names(reference))){
 
       warning("Names of reference datasets not provided. Will use generic names.")
-      names(reference) <- paste0("Ref", 1:length(reference))
+      names(reference) <- paste0("Ref", seq_along(reference))
     }
 
 
@@ -110,7 +110,7 @@ PhiSpace <- function(
     isModel <- vapply(reference, inherits, logical(1), "PhiSpaceModel")
     modelRes <- vector("list", length(reference))
     if(any(isModel)) modelRes[isModel] <- .PhiSpace_fromModels(reference[isModel], query, queryAssay)
-    for(ii in 1:length(reference)){
+    for(ii in seq_along(reference)){
 
       refDataName <- names(reference)[ii]
       refSingle <- reference[[ii]]
@@ -164,7 +164,7 @@ PhiSpace <- function(
     # If multiple queries were provided
     if(is.list(query)){
 
-      for(i in 1:length(query)){
+      for(i in seq_along(query)){
 
         scSingleQuery_list <- lapply(sc_list, function(x) x[[i]])
         reducedDim(query[[i]], reducedDimName) <- Reduce(cbind, scSingleQuery_list)
@@ -214,7 +214,7 @@ PhiSpace <- function(
       reducedDim(query, reducedDimName) <- PhiRes$PhiSpaceNorm
     } else {
 
-      for(i in 1:length(query)){
+      for(i in seq_along(query)){
 
         if(storeUnNorm) reducedDim(query[[i]], paste0(reducedDimName, "_nonNorm")) <- PhiRes$PhiSpaceScore[[i]]
         reducedDim(query[[i]], reducedDimName) <- PhiRes$PhiSpaceNorm[[i]]

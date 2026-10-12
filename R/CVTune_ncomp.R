@@ -67,7 +67,7 @@ CVTune_ncomp <- function(reference,
   # Create data partition
   withr::local_seed(seed)
   Nsamples <- nrow(XX)
-  allIdx <- 1:Nsamples # indices of all samples
+  allIdx <- seq_len(Nsamples) # indices of all samples
   permuIdx <- sample(allIdx, Nsamples) # random permutation of allIdx
   foldSize <- floor(Nsamples/Kfolds) # input of split f below
   splitIdx <- split2(permuIdx, Kfolds)
@@ -95,9 +95,9 @@ CVTune_ncomp <- function(reference,
   # Parallel computing CV
   if(Ncores > 1){
     Ncores <- min(Ncores, parallel::detectCores()-1)
-    err_re <- parallel::mclapply(1:Kfolds, FUN = CVjob, mc.cores = Ncores)
+    err_re <- parallel::mclapply(seq_len(Kfolds), FUN = CVjob, mc.cores = Ncores)
   } else {
-    err_re <- lapply(1:Kfolds, FUN = CVjob)
+    err_re <- lapply(seq_len(Kfolds), FUN = CVjob)
   }
   errs <- Reduce(`+`, err_re)/length(err_re)
 

@@ -93,7 +93,7 @@ classErr <- function(classQuery, classOriginal, labPerSample = NULL){
 
     # Balanced error
     classL <- unique(classOriginal)
-    errs <- vapply(1:length(classL),
+    errs <- vapply(seq_along(classL),
                    function(x){
                      cl <- classL[x]
                      idx <- (classOriginal == cl)
@@ -111,7 +111,7 @@ classErr <- function(classQuery, classOriginal, labPerSample = NULL){
 
     # Overall errors
     ove_errs <-
-      vapply(1:nrow(classQuery),
+      vapply(seq_len(nrow(classQuery)),
              function(x){
                out <- sum(2 - sum(classQuery[x,] %in% classOriginal[x,]))/labPerSample
              }, numeric(1))
@@ -119,10 +119,10 @@ classErr <- function(classQuery, classOriginal, labPerSample = NULL){
 
     # Balanced error
     out_list <- vector("list", labPerSample)
-    for(erIdx in 1:ncol(classOriginal)){
+    for(erIdx in seq_len(ncol(classOriginal))){
 
       classL <- unique(classOriginal[,erIdx])
-      errs <- vapply(1:length(classL),
+      errs <- vapply(seq_along(classL),
                      function(x){
                        cl <- classL[x]
                        idx <- (classOriginal[,erIdx] == cl)
@@ -175,7 +175,7 @@ reNameCols <- function(
 ){
 
   mat <- as.data.frame(mat)
-  colnames(mat) <- paste0(key, 1:ncol(mat))
+  colnames(mat) <- paste0(key, seq_len(ncol(mat)))
 
   return(mat)
 }
@@ -271,8 +271,8 @@ scal <- function(X, center = NULL, scale = NULL){
   }
 
   out <- coefs[, , k]
-  dim(out) <- dim(coefs)[1:2]
-  dimnames(out) <- dimnames(coefs)[1:2]
+  dim(out) <- dim(coefs)[seq_len(2)]
+  dimnames(out) <- dimnames(coefs)[seq_len(2)]
 
   return(out)
 }

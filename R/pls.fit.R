@@ -52,7 +52,7 @@ pls.fit <-
     TT <- fit$TT
     prednames <- dnX[[2]]
     respnames <- dnY[[2]]
-    compnames <- paste0("comp", 1:ncomp)
+    compnames <- paste0("comp", seq_len(ncomp))
     dimnames(B) <- list(prednames, respnames, paste(keepComps, "comps"))
 
     if (DRinfo) {
@@ -85,7 +85,7 @@ pls.fit <-
   B <- array(0, c(npred, nresp, length(keepComps)))
   Bcum <- matrix(0, nrow = npred, ncol = nresp)
 
-  for (a in 1:ncomp) {
+  for (a in seq_len(ncomp)) {
     if (nresp == 1) {
       w.a <- XtY/sqrt(sum(XtY^2))
     } else {
@@ -100,8 +100,8 @@ pls.fit <-
     w.a <- as.numeric(w.a)
     r.a <- w.a
     if (a > 1) {
-      r.a <- r.a - as.numeric(R[, 1:(a - 1), drop = FALSE] %*%
-                                crossprod(P[, 1:(a - 1), drop = FALSE], w.a))
+      r.a <- r.a - as.numeric(R[, seq_len(a - 1), drop = FALSE] %*%
+                                crossprod(P[, seq_len(a - 1), drop = FALSE], w.a))
     }
     pr <- project(r.a)
     tsq <- pr$tsq

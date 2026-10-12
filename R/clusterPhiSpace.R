@@ -256,7 +256,7 @@ clusterPhiSpace <- function(
   )
 
   # Extract PC scores for clustering
-  pc_scores <- pca_result$scores[, 1:ncomp, drop = FALSE]
+  pc_scores <- pca_result$scores[, seq_len(ncomp), drop = FALSE]
 
   # Determine k value(s)
   if (!is.null(k_range)) {
@@ -499,7 +499,7 @@ print.PhiSpaceClustering <- function(x, ...) {
       round(x$kmeans_result$betweenss / x$kmeans_result$totss, 3), "\n")
 
   if (!is.null(x$pca_result)) {
-    var_explained <- sum(x$pca_result$props[1:ncol(x$pc_scores)])
+    var_explained <- sum(x$pca_result$props[seq_len(ncol(x$pc_scores))])
     cat("\nVariance explained by selected PCs:",
         round(var_explained * 100, 1), "%\n")
   }
@@ -553,9 +553,9 @@ summary.PhiSpaceClustering <- function(object, ...) {
     cat("\n\nPCA variance explained:\n")
     n_show <- min(10, length(object$pca_result$props))
     pca_df <- data.frame(
-      PC = paste0("PC", 1:n_show),
-      Variance = round(object$pca_result$props[1:n_show], 4),
-      Cumulative = round(cumsum(object$pca_result$props)[1:n_show], 4)
+      PC = paste0("PC", seq_len(n_show)),
+      Variance = round(object$pca_result$props[seq_len(n_show)], 4),
+      Cumulative = round(cumsum(object$pca_result$props)[seq_len(n_show)], 4)
     )
     print(pca_df)
   }
@@ -661,8 +661,8 @@ plot.PhiSpaceClustering <- function(x, type = c("pca", "elbow", "silhouette", "v
 
     n_show <- min(30, length(x$pca_result$props))
     plot_df <- data.frame(
-      PC = 1:n_show,
-      Variance = x$pca_result$props[1:n_show]
+      PC = seq_len(n_show),
+      Variance = x$pca_result$props[seq_len(n_show)]
     )
 
     p <- ggplot2::ggplot(plot_df, ggplot2::aes(x = .data$PC, y = .data$Variance)) +

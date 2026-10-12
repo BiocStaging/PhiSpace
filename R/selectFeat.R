@@ -34,7 +34,7 @@ selectFeat <- function(
 
   selectFeat <- unique(
     as.vector(
-      orderByCol[1:nfeat, ]
+      orderByCol[seq_len(nfeat), ]
     )
   )
 

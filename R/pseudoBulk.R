@@ -48,7 +48,7 @@ pseudoBulk <- function(
   # Index list
   cluster <- as.character(colData(sce)[, clusterid])
   cluname <- sort(unique(cluster))
-  idxList <- split(1:nCells, cluster)
+  idxList <- split(seq_len(nCells), cluster)
   names(idxList) <- cluname
   Ncluster <- length(cluname)
   clustSizes <- lengths(idxList)
@@ -70,7 +70,7 @@ pseudoBulk <- function(
   # Resample
   withr::local_seed(seed)
   resampIdx <- lapply(
-    1:Ncluster,
+    seq_len(Ncluster),
     function(x){
 
       resampSize <- resampSizes[x]
@@ -79,7 +79,7 @@ pseudoBulk <- function(
       clustIdx <- idxList[[x]]
       out <- split(
         clustIdx[sample.int(length(clustIdx), nPool*resampSize, replace = TRUE)],
-        rep(1:resampSize, rep(nPool, resampSize))
+        rep(seq_len(resampSize), rep(nPool, resampSize))
       )
       names(out) <- NULL
       return(out)
@@ -104,7 +104,7 @@ pseudoBulk <- function(
   # Aggregate Y
   YYagg <- as.matrix(Matrix::crossprod(A, as.matrix(YY))) / poolSizes
   dimnames(YYagg) <- list(NULL, colnames(YY))
-  colnames(XXagg) <- rownames(YYagg) <- paste0("PB", 1:ncol(XXagg))
+  colnames(XXagg) <- rownames(YYagg) <- paste0("PB", seq_len(ncol(XXagg)))
 
   # Output
   sce <- SingleCellExperiment(list(counts = XXagg), reducedDims = list(response = YYagg))

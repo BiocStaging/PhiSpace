@@ -278,7 +278,7 @@ rankFeatures <- function(data,
       stringsAsFactors = FALSE
     )
     # Add individual response importances
-    for (i in 1:ncol(importance_scores)) {
+    for (i in seq_len(ncol(importance_scores))) {
       feature_ranking[[paste0("importance_", colnames(importance_scores)[i])]] <-
         importance_scores[, i]
     }

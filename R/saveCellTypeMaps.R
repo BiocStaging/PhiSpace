@@ -153,7 +153,7 @@ saveCellTypeMaps <- function(
   if (inherits(sce, "SpatialExperiment") && all(coordNames == c("x", "y"))) {
     spatial_coords <- spatialCoordsNames(sce)
     if (length(spatial_coords) >= 2) {
-      coordNames <- spatial_coords[1:2]
+      coordNames <- spatial_coords[seq_len(2)]
       message("Using spatial coordinates: ", paste(coordNames, collapse = ", "))
     }
   } else {

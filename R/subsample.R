@@ -23,7 +23,7 @@ subsample <- function(
 
     withr::local_seed(seed)
     idx <- sample(
-      1:ncol(sce),
+      seq_len(ncol(sce)),
       outSize
     )
 
