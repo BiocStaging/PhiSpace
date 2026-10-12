@@ -65,6 +65,12 @@ PhiSpace 1.1.0, the release archived on Zenodo.
   (STexampleData) with single-cell RNA-seq of the cortex and hippocampus,
   and finds niches. The eight larger case studies are website articles in
   `vignettes/articles/` and are not part of the package.
+* New `logNormTransf()` divides counts by size factors (by default the
+  library sizes, centred to mean 1) and takes `log2(x + 1)`. Its values are
+  identical to those of `scuttle::logNormCounts()` with default arguments,
+  which Bioconductor 3.24 deprecates. `scranTransf()` now uses it; its values
+  are unchanged, but a sparse or `DelayedArray` count matrix now gives a
+  `dgCMatrix` assay.
 * New `trainPhiSpace()` fits a PhiSpace model on a reference and returns it as
   a `PhiSpaceModel` object, which can be saved and applied later to queries
   with `predict()`, without the reference cells. The model records the
@@ -241,6 +247,8 @@ PhiSpace 1.1.0, the release archived on Zenodo.
 * The `License` field changed from `AGPL (>= 3)` to `AGPL-3`.
 * Raw scores from `phenotype()` (for example `PhiSpaceScore` and `YrefHat`)
   no longer carry a `"scaled:center"` attribute.
+* `scuttle` moved from Imports to Suggests: the package code no longer
+  calls it, and the examples and tests use `scuttle::mockSCE()`.
 * `pls` is now a suggested package; the unit tests compare `mvr()` with
   `pls::kernelpls.fit`.
 * The `PhiSpaceR_1ref()` help page now documents every value that the

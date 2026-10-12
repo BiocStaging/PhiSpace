@@ -29,7 +29,6 @@ Imports:
     plyr,
     stats,
     scran,
-    scuttle,
     FNN,
     S4Vectors,
     kerndwd,
@@ -45,6 +44,7 @@ Suggests:
     pls,
     rmarkdown,
     scRNAseq,
+    scuttle,
     STexampleData,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr

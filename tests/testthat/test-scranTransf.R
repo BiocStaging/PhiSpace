@@ -11,7 +11,7 @@ test_that("scranTransf replaces non-positive size factors by the smallest positi
     .package = "scran"
   )
   out <- scranTransf(sce, clusts = rep(1:2, 3))
-  # logNormCounts() centres the size factors to mean 1
+  # logNormTransf() centres the size factors to mean 1
   expected <- c(2, 0.5, 3, 0.5, 0.5, 4)
   expect_equal(out$sizeFactor, expected / mean(expected))
   expect_true("logcounts" %in% SummarizedExperiment::assayNames(out))

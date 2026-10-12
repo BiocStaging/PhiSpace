@@ -14,10 +14,12 @@ scranTransf(sce, assayName = "counts", clusts = NULL)
 \item{clusts}{Cluster labels (optional).}
 }
 \value{
-SCE object.
+SCE object with the assay \code{logcounts} and the size factors, centred
+to mean 1, in \code{colData(sce)$sizeFactor}.
 }
 \description{
-Run scran normalisation
+Computes pooled size factors with \code{scran::computeSumFactors()} and
+log-normalises the counts with \code{\link[=logNormTransf]{logNormTransf()}}.
 }
 \examples{
 sce <- scuttle::mockSCE(ncells = 200, ngenes = 200)
