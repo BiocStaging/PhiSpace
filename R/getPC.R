@@ -1,8 +1,10 @@
 #' Principal component analysis (PCA) based on partial singular value decomposition (SVD).
 #'
 #' `getPC()` uses irlba's partial SVD. When `ncomp` is at least half of the
-#' smaller dimension of `X`, where irlba can be inaccurate, it uses a full SVD
-#' of a dense copy of `X` instead.
+#' smaller dimension of `X`, where irlba can be inaccurate, or when the smaller
+#' dimension is at most 100, it uses a full SVD of a dense copy of `X`
+#' instead. On such small matrices irlba may not converge, and its result then
+#' depends on its random start; the full SVD does not.
 #'
 #' @param X Matrix.
 #' @param ncomp Integer.
@@ -30,9 +32,9 @@
 #' @export
 getPC <- function(X, ncomp, center = TRUE, scale = FALSE, sparse = FALSE){
 
-  if(ncomp >= 0.5 * min(dim(X))){
-    # irlba warns here and may be inaccurate. One dimension of X is at most
-    # 2 * ncomp, so a dense copy is small.
+  if(ncomp >= 0.5 * min(dim(X)) || min(dim(X)) <= 100){
+    # irlba warns here or may not converge, and then depends on its random
+    # start. One dimension of X is small, so the full SVD is cheap.
     return(.getPC_svd(X, ncomp, center = center, scale = scale))
   }
 

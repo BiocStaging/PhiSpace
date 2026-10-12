@@ -47,6 +47,14 @@ PhiSpace 1.1.0, the release archived on Zenodo.
   CosMx and CITE-seq vignettes. In tests, the results agreed with irlba to
   about 1e-14, apart from the signs of components. The CosMx niches and the
   CITE-seq result checks are unchanged.
+* `getPC()` also uses the full singular value decomposition when the smaller
+  dimension of `X` is at most 100, as for PhiSpace score matrices with one
+  column per cell type. On a 2,702 x 7 score matrix with 3 components, irlba
+  did not converge, and its principal component scores changed with the
+  session's random state by up to 0.17 (scores of about 1 in size). The
+  niches of `findNiches()` therefore changed between runs, although it takes
+  a `seed`: it sets the seed after the PCA. Where irlba converged, results
+  are unchanged apart from rounding and the signs of components.
 
 ## New features
 

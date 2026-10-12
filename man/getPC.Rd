@@ -31,8 +31,10 @@ A list containing
 }
 \description{
 \code{getPC()} uses irlba's partial SVD. When \code{ncomp} is at least half of the
-smaller dimension of \code{X}, where irlba can be inaccurate, it uses a full SVD
-of a dense copy of \code{X} instead.
+smaller dimension of \code{X}, where irlba can be inaccurate, or when the smaller
+dimension is at most 100, it uses a full SVD of a dense copy of \code{X}
+instead. On such small matrices irlba may not converge, and its result then
+depends on its random start; the full SVD does not.
 }
 \examples{
 set.seed(1)

@@ -66,3 +66,29 @@ test_that("getPC scales sparse and dense input the same way", {
   expect_equal(sparse$totVar, ncol(Xs))
   expect_equal(abs(sparse$scores), abs(dense$scores), tolerance = 1e-6)
 })
+
+test_that("getPC uses a full SVD when min(dim(X)) is at most 100", {
+  # Like a PhiSpace score matrix: many cells, one column per cell type.
+  set.seed(7)
+  X <- matrix(rnorm(2000 * 7), 2000, 7)
+  local_mocked_bindings(irlba = function(...) stop("irlba was called"),
+                        .package = "irlba")
+  pc1 <- withr::with_seed(1, getPC(X, ncomp = 3))
+  pc2 <- withr::with_seed(2, getPC(X, ncomp = 3))
+  expect_identical(pc1, pc2)
+  ref <- stats::prcomp(X, center = TRUE, scale. = FALSE)
+  expect_equal(abs(unname(pc1$scores)), abs(unname(ref$x[, 1:3])))
+})
+
+test_that("getPC uses irlba for a few components of a larger matrix", {
+  set.seed(8)
+  X <- matrix(rnorm(400 * 150), 400, 150) %*% diag(seq_len(150) / 10)
+  orig <- irlba::irlba
+  called <- FALSE
+  local_mocked_bindings(irlba = function(...) { called <<- TRUE; orig(...) },
+                        .package = "irlba")
+  pc <- getPC(X, ncomp = 5)
+  expect_true(called)
+  ref <- stats::prcomp(X, center = TRUE, scale. = FALSE)
+  expect_equal(abs(unname(pc$scores)), abs(unname(ref$x[, 1:5])), tolerance = 1e-6)
+})
