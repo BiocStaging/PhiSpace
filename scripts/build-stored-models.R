@@ -23,7 +23,7 @@ for (rel in staged) {
 Sys.setenv(PHISPACE_COSMX_DATA = normalizePath(run_dir, winslash = "/"))
 pkgload::load_all(".", quiet = TRUE)
 pkgdown::build_article(
-  "StoredModels", pkg = ".", lazy = FALSE, new_process = FALSE,
+  "articles/StoredModels", pkg = ".", lazy = FALSE, new_process = FALSE,
   override = list(destination = site_dir), quiet = FALSE
 )
 article <- file.path(site_dir, "articles", "StoredModels.html")

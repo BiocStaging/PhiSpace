@@ -19,7 +19,7 @@ for (rel in manifest$path) {
 Sys.setenv(PHISPACE_GETTING_STARTED_DATA = normalizePath(run_dir, winslash = "/"))
 pkgload::load_all(".", quiet = TRUE)
 pkgdown::build_article(
-  "getting_started", pkg = ".", lazy = FALSE, new_process = FALSE,
+  "articles/getting_started", pkg = ".", lazy = FALSE, new_process = FALSE,
   override = list(destination = site_dir), quiet = FALSE
 )
 article <- file.path(site_dir, "articles", "getting_started.html")

@@ -15,20 +15,20 @@ articles:
   - title: "PhiSpace multiomics: using PhiSpace for single-cell multiomics"
     desc: "Using bulk or single-cell RNA-seq references to annotate single-cell multiomics queries."
     contents:
-      - getting_started
-      - PerturbSeq
-      - CITE-seq
-      - BridgeAnnotation
+      - articles/getting_started
+      - articles/PerturbSeq
+      - articles/CITE-seq
+      - articles/BridgeAnnotation
   - title: "PhiSpace ST: using PhiSpace for spatial transcriptomics"
     desc: "Platform-agnostic cell state annotation of ST queries using scRNA-seq references."
     contents:
-      - Visium
-      - CosMx
-      - StereoSeq
+      - articles/Visium
+      - articles/CosMx
+      - articles/StereoSeq
   - title: "Stored PhiSpace models"
     desc: "Training a model once and applying it to new queries without the reference."
     contents:
-      - StoredModels
+      - articles/StoredModels
 
 navbar:
   title: "PhiSpace"

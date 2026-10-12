@@ -10,7 +10,7 @@
 ^docs$
 ^pkgdown$
 ^\.github$
-^vignettes$
+^vignettes/articles$
 ^scripts$
 ^WEBSITE\.md$
 ^Test$

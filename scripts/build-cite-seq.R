@@ -27,7 +27,7 @@ Sys.setenv(PHISPACE_CITE_SEQ_DATA = normalizePath(run_dir, winslash = "/"))
 cached_md5 <- tools::md5sum(file.path(run_dir, manifest$path[manifest$role == "cached"]))
 pkgload::load_all(".", quiet = TRUE)
 pkgdown::build_article(
-  "CITE-seq", pkg = ".", lazy = FALSE, new_process = FALSE,
+  "articles/CITE-seq", pkg = ".", lazy = FALSE, new_process = FALSE,
   override = list(destination = site_dir), quiet = FALSE
 )
 article <- file.path(site_dir, "articles", "CITE-seq.html")

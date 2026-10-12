@@ -19,7 +19,7 @@ for (rel in manifest$path) {
 Sys.setenv(PHISPACE_VISIUM_DATA = normalizePath(run_dir, winslash = "/"))
 pkgload::load_all(".", quiet = TRUE)
 pkgdown::build_article(
-  "Visium", pkg = ".", lazy = FALSE, new_process = FALSE,
+  "articles/Visium", pkg = ".", lazy = FALSE, new_process = FALSE,
   override = list(destination = site_dir), quiet = FALSE
 )
 article <- file.path(site_dir, "articles", "Visium.html")

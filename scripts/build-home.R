@@ -32,7 +32,8 @@ for (page in c("authors.html", "index.html")) {
 pkgdown::build_articles_index(pkg = ".", override = list(destination = site_dir))
 cfg <- yaml::read_yaml("_pkgdown.yml")
 articles <- unlist(lapply(cfg$articles, `[[`, "contents"))
-pages <- paste0(articles, ".html")
+# vignettes/articles/<name>.Rmd is written to articles/<name>.html
+pages <- paste0(sub("^articles/", "", articles), ".html")
 built <- file.exists(file.path(site_dir, "articles", pages))
 if (!all(built)) stop("Articles not built: ", paste(articles[!built], collapse = ", "))
 index <- paste(readLines(file.path(site_dir, "articles", "index.html"), warn = FALSE), collapse = "\n")

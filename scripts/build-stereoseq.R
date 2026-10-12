@@ -16,7 +16,7 @@ for (rel in manifest$path) {
 Sys.setenv(PHISPACE_STEREOSEQ_DATA = normalizePath(run_dir, winslash = "/"))
 pkgload::load_all(".", quiet = TRUE)
 pkgdown::build_article(
-  "StereoSeq", pkg = ".", lazy = FALSE, new_process = FALSE,
+  "articles/StereoSeq", pkg = ".", lazy = FALSE, new_process = FALSE,
   override = list(destination = site_dir), quiet = FALSE
 )
 article <- file.path(site_dir, "articles", "StereoSeq.html")
