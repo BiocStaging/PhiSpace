@@ -11,6 +11,6 @@
 translateLabel <- function(text, dictionary, dFrom = "label.fine", dTo = "label.main"){
   translated <- plyr::mapvalues(text,
                                 from = dictionary[,dFrom],
-                                to = dictionary[,dTo], warn_missing = F)
+                                to = dictionary[,dTo], warn_missing = FALSE)
   return(translated)
 }

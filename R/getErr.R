@@ -75,7 +75,7 @@ getErr <- function(
                                  scale = scal,
                                  center = attr(XX_RT_cent, "scaled:center") )
              Yhat <- scale(XXtestCent %*% Bhat,
-                           scale = F,
+                           scale = FALSE,
                            center = -colMeans(YYtrain))
 
 

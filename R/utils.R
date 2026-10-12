@@ -288,8 +288,8 @@ scal <- function(X, center = NULL, scale = NULL){
 doubleCent <- function(X){
 
   X <- as.matrix(X)
-  X <- sweep(X, 1, rowMeans(X, na.rm = T))
-  X <- sweep(X, 2, colMeans(X, na.rm = T))
+  X <- sweep(X, 1, rowMeans(X, na.rm = TRUE))
+  X <- sweep(X, 2, colMeans(X, na.rm = TRUE))
   return(X)
 }
 

@@ -7,7 +7,7 @@
 #' @return A list containing updated SingleCellExperiment obejcts with matching features.
 #'
 #' @export
-KeepCommonGenes <- function(reference, query, dots2hyphen = F){
+KeepCommonGenes <- function(reference, query, dots2hyphen = FALSE){
   if(dots2hyphen){
     rownames(reference) <- gsub("\\.", "-", rownames(reference))
     rownames(query) <- gsub("\\.", "-", rownames(query))

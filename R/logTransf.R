@@ -41,7 +41,7 @@ logTransf <- function(
         log(
           scale(
             assay(sce, assayName),
-            center = F,
+            center = FALSE,
             scale = libSizes
           ) * scalFactor + 1
         ),

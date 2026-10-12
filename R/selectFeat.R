@@ -28,7 +28,7 @@ selectFeat <- function(
         toSort <- x
       }
 
-      names(sort(toSort, decreasing = T))
+      names(sort(toSort, decreasing = TRUE))
     }
   )
 

@@ -22,11 +22,11 @@
 basicPlotFormat <- function(
     p, theme_overall = "bw",
     base_size = 8, legend.position = "top",
-    x.text.blank = F, y.text.blank = F,
-    axis.title.bold = T, legend.title.bold = T,
-    axis.title.x.blank = F, axis.title.y.blank = F,
+    x.text.blank = FALSE, y.text.blank = FALSE,
+    axis.title.bold = TRUE, legend.title.bold = TRUE,
+    axis.title.x.blank = FALSE, axis.title.y.blank = FALSE,
     ## Legend format
-    legend.title.blank = F,
+    legend.title.blank = FALSE,
     legend.spacing.x = 0,
     legend.key.spacing = 0,
     legend.key.spacing.y = 0,
@@ -207,7 +207,7 @@ VizSpatial <- function(
     legend.symb.size = NULL,
     legend.title = NULL,
     fsize = 14,
-    reOrder = F,
+    reOrder = FALSE,
     ...
 ){
 
@@ -342,8 +342,8 @@ VizSpatial <- function(
 
   p <- basicPlotFormat(
     p, legend.position = legend.position,
-    x.text.blank = T, y.text.blank = T,
-    axis.title.x.blank = T, axis.title.y.blank = T, base_size = fsize, ...
+    x.text.blank = TRUE, y.text.blank = TRUE,
+    axis.title.x.blank = TRUE, axis.title.y.blank = TRUE, base_size = fsize, ...
   )
 
   if(!is.null(legend.symb.size)){

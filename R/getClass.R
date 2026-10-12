@@ -20,7 +20,7 @@ getClass <- function(X, labPerSample = NULL){
 
     out <- sapply(1:nrow(X),
                   function(x){
-                    vec <- X[x,,drop=F]
+                    vec <- X[x,,drop=FALSE]
                     ct_sort <- colnames(vec)[order(-vec)]
                     ct_sort[1:labPerSample]
                     # colnames(X)[rank(-vec, ties.method = "last") <= labPerSample]

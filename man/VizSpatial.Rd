@@ -21,7 +21,7 @@ VizSpatial(
   legend.symb.size = NULL,
   legend.title = NULL,
   fsize = 14,
-  reOrder = F,
+  reOrder = FALSE,
   ...
 )
 }

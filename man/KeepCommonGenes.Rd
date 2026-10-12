@@ -4,7 +4,7 @@
 \alias{KeepCommonGenes}
 \title{Keep common genes of two SingleCellExperiment objects.}
 \usage{
-KeepCommonGenes(reference, query, dots2hyphen = F)
+KeepCommonGenes(reference, query, dots2hyphen = FALSE)
 }
 \arguments{
 \item{reference}{SingleCellExperiment object.}
