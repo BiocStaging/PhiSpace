@@ -194,6 +194,11 @@ PhiSpace 1.1.0, the release archived on Zenodo.
   the variance proportions that `getPC()` returns. Previously `print()`
   reported 0% variance explained, `summary()` and `plot(type = "variance")`
   failed, and the PCA plot axis labels showed no percentages.
+* `scranTransf()` replaced non-positive size factors with an arbitrary
+  positive size factor instead of the smallest one: it took a position in
+  the sorted size factors and read that position in the unsorted ones. It
+  now uses the smallest positive size factor. Data with only positive size
+  factors give the same result as before.
 
 ## Progress messages
 

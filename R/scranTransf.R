@@ -19,9 +19,9 @@ scranTransf <- function(
 
   if(is.null(clusts)) clusts <- scran::quickCluster(sce, assay.type = assayName)
   sce <- scran::computeSumFactors(sce, assay.type = assayName, cluster = clusts)
-  # If having non-positive size factors
+  # Replace non-positive size factors by the smallest positive one
   if(min(sce$sizeFactor) <= 0){
-    smallestPositive <- sce$sizeFactor[which(sort(sce$sizeFactor) > 0)[1]]
+    smallestPositive <- min(sce$sizeFactor[sce$sizeFactor > 0])
     sce$sizeFactor[sce$sizeFactor <= 0] <- smallestPositive
   }
   sce <- scuttle::logNormCounts(sce, assay.type = assayName)
