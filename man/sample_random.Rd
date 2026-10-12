@@ -12,7 +12,7 @@ sample_random(coordinates, n_target)
 \item{n_target}{Number of targets}
 }
 \value{
-Character vector of the selected cell IDs.
+Integer vector of the selected cell indices.
 }
 \description{
 Random sampling (baseline method)

@@ -106,7 +106,7 @@ spatialSampler <- function(spe,
 #'
 #' @param coordinates Spatial coordiantes
 #' @param n_target Number of targets
-#' @return Character vector of the selected cell IDs.
+#' @return Integer vector of the selected cell indices.
 #' @keywords internal
 sample_random <- function(coordinates, n_target) {
   return(sample(coordinates$cell_id, n_target))
@@ -122,7 +122,7 @@ sample_random <- function(coordinates, n_target) {
 #' @param min_cells_per_region Mimimum cells per region
 #' @param balance_regions Balance regions
 #' @param verbose Whether to report progress with [message()]
-#' @return Character vector of the selected cell IDs.
+#' @return Integer vector of the selected cell indices.
 #' @keywords internal
 sample_grid <- function(coordinates, n_target, grid_size, min_cells_per_region, balance_regions,
                         verbose = TRUE) {
@@ -196,7 +196,7 @@ sample_grid <- function(coordinates, n_target, grid_size, min_cells_per_region, 
 #' @param min_cells_per_region Minimum cells per region
 #' @param balance_regions Balance regions
 #' @param verbose Whether to report progress with [message()]
-#' @return Character vector of the selected cell IDs.
+#' @return Integer vector of the selected cell indices.
 #' @keywords internal
 sample_kmeans <- function(coordinates, n_target, min_cells_per_region, balance_regions,
                           verbose = TRUE) {
