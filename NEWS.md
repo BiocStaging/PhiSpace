@@ -58,6 +58,13 @@ PhiSpace 1.1.0, the release archived on Zenodo.
 
 ## New features
 
+* Two package vignettes run on small Bioconductor datasets:
+  `vignette("PhiSpace")` annotates single-cell RNA-seq of mouse blood stem
+  and progenitor cells (scRNAseq) with bulk ImmGen samples (celldex), and
+  `vignette("PhiSpaceST")` annotates a 10x Visium section of the mouse brain
+  (STexampleData) with single-cell RNA-seq of the cortex and hippocampus,
+  and finds niches. The eight larger case studies are website articles in
+  `vignettes/articles/` and are not part of the package.
 * New `trainPhiSpace()` fits a PhiSpace model on a reference and returns it as
   a `PhiSpaceModel` object, which can be saved and applied later to queries
   with `predict()`, without the reference cells. The model records the

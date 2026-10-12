@@ -18,6 +18,7 @@ Sections below written before 2026-10-12 use the old layout: read `pkg/X` as `X`
 PhiSpace/
 ├── R/                      # R source files
 ├── man/                    # roxygen2-generated documentation
+├── vignettes/              # 2 package vignettes (PhiSpace, PhiSpaceST) on Bioconductor data
 ├── vignettes/articles/     # 8 website articles (Rmd), not in the package build
 ├── tests/                  # testthat tests
 ├── inst/CITATION

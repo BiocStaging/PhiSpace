@@ -36,9 +36,18 @@ Imports:
     umap,
     withr
 Suggests: 
+    AnnotationDbi,
+    BiocStyle,
+    celldex,
     cluster,
+    knitr,
+    org.Mm.eg.db,
     pls,
+    rmarkdown,
+    scRNAseq,
+    STexampleData,
     testthat (>= 3.0.0)
+VignetteBuilder: knitr
 Config/testthat/edition: 3
 biocViews: Software, SingleCell, Spatial, Transcriptomics, GeneExpression,
     CellBiology, Classification, Regression, DimensionReduction, Clustering

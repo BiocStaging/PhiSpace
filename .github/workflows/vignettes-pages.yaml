@@ -99,6 +99,8 @@ jobs:
         run: Rscript --vanilla scripts/build-cosmx.R
       - name: Build Stored models with fresh results
         run: Rscript --vanilla scripts/build-stored-models.R
+      - name: Build the package vignettes
+        run: Rscript --vanilla scripts/build-package-vignettes.R
       - name: Build function reference
         run: Rscript --vanilla scripts/build-reference.R
       - name: Build home and citation pages

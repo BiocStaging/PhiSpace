@@ -4,7 +4,10 @@ The root workflow `.github/workflows/vignettes-pages.yaml` checks pull requests
 and builds and publishes pushes to `main`. It also supports a manual run from
 the Actions tab. Stereo-seq, Visium, Getting Started, PerturbSeq, CosMx and
 Stored models are rebuilt from fresh results, and BridgeAnnotation and CITE-seq are rebuilt from
-verified cached results. The first build script creates the staged site with
+verified cached results. The two package vignettes (`vignettes/PhiSpace.Rmd`
+and `vignettes/PhiSpaceST.Rmd`) are built by `scripts/build-package-vignettes.R`
+from Bioconductor data that they download; R CMD check builds them too. The
+first build script creates the staged site with
 `pkgdown::init_site()`, which copies the shared assets, favicons and logo; the
 repository does not commit a built website. The function reference
 (`reference/`) is then rebuilt from `man/` by `scripts/build-reference.R`. The
@@ -56,6 +59,7 @@ Rscript --vanilla scripts/build-cite-seq.R
 Rscript --vanilla scripts/build-perturbseq.R
 Rscript --vanilla scripts/build-cosmx.R
 Rscript --vanilla scripts/build-stored-models.R
+Rscript --vanilla scripts/build-package-vignettes.R
 Rscript --vanilla scripts/build-reference.R
 Rscript --vanilla scripts/build-home.R
 ```
@@ -92,6 +96,7 @@ Rscript --vanilla scripts/build-cite-seq.R
 Rscript --vanilla scripts/build-perturbseq.R
 Rscript --vanilla scripts/build-cosmx.R
 Rscript --vanilla scripts/build-stored-models.R
+Rscript --vanilla scripts/build-package-vignettes.R
 Rscript --vanilla scripts/build-reference.R
 Rscript --vanilla scripts/build-home.R
 ```

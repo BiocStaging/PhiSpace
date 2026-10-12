@@ -1,0 +1,186 @@
+---
+title: "PhiSpace ST for spatial transcriptomics"
+subtitle: "Cell types and niches in a Visium section of the mouse brain"
+author: "Jiadong Mao"
+date: "`r Sys.Date()`"
+output:
+  BiocStyle::html_document:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{PhiSpace ST for spatial transcriptomics}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE, comment = "#>", fig.width = 7, fig.height = 5
+)
+```
+
+# Introduction
+
+PhiSpace ST applies PhiSpace to spatial transcriptomics (ST). A single-cell
+RNA-seq reference with annotated cell types is used to score every spatial
+location of the query for every cell type. The scores are continuous, so a
+location that contains several cells, such as a 10x Visium spot, can score
+highly for several cell types. The scores of all locations can then be
+clustered into **niches**: groups of locations with a similar cell type
+composition.
+
+In this vignette the reference is single-cell RNA-seq of the mouse
+somatosensory cortex and hippocampus (Zeisel et al., 2015), and the query is a
+10x Visium section of the mouse brain. The method is described in Mao et al.
+(2026), *Cell Reports Methods* 6(8), 101483
+(<https://doi.org/10.1016/j.crmeth.2026.101483>).
+The introductory vignette, `vignette("PhiSpace", package = "PhiSpace")`,
+explains the PhiSpace scores in more detail. Larger case studies, including
+imaging-based and sequencing-based ST platforms, are on the
+[PhiSpace website](https://mao-lab-org.github.io/PhiSpace/).
+
+# Installation
+
+```{r install, eval = FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("PhiSpace")
+```
+
+```{r packages, message = FALSE}
+library(PhiSpace)
+library(SpatialExperiment)
+library(scRNAseq)
+library(STexampleData)
+```
+
+# Data
+
+## Query: a Visium section of the mouse brain
+
+`r Biocpkg("STexampleData")` provides a 10x Visium section of the mouse brain
+as a `SpatialExperiment` object. We keep the spots that cover tissue, use gene
+symbols as row names, and log-normalise the counts.
+
+```{r query, message = FALSE}
+query <- Visium_mouseCoronal()
+query <- query[, query$in_tissue == 1]
+rownames(query) <- rowData(query)$gene_name
+query <- query[!duplicated(rownames(query)), ]
+query <- scuttle::logNormCounts(query)
+query
+```
+
+## Reference: single-cell RNA-seq of the mouse cortex and hippocampus
+
+The Zeisel dataset in `r Biocpkg("scRNAseq")` contains 3,005 cells with seven
+major cell types in the column `level1class`.
+
+```{r reference, message = FALSE}
+reference <- fetchDataset("zeisel-brain-2015", "2023-12-14")
+reference <- scuttle::logNormCounts(reference)
+table(reference$level1class)
+```
+
+The reference and the query are both RNA-seq counts, and both are
+log-normalised in the same way. We keep the genes measured in both.
+
+```{r genes}
+genes <- intersect(rownames(reference), rownames(query))
+length(genes)
+reference <- reference[genes, ]
+query <- query[genes, ]
+```
+
+# Annotation
+
+`PhiSpace()` fits a partial least squares (PLS) model of the cell types on the
+reference and scores every spot of the query. The number of components,
+`ncomp`, is set to the number of cell types. With `nfeat = 300`, PhiSpace
+selects the 300 most important genes for each cell type and uses the union of
+these genes in the final model.
+
+```{r phispace}
+query <- PhiSpace(
+    reference, query,
+    phenotypes = "level1class", refAssay = "logcounts",
+    ncomp = 7, nfeat = 300
+)
+reducedDim(query, "PhiSpace") <- normPhiScores(reducedDim(query, "PhiSpace"))
+head(reducedDim(query, "PhiSpace"), 3)
+```
+
+`normPhiScores()` centres the scores of each cell type at their median and
+scales them to a maximum absolute value of 1, so that the scores of different
+cell types are comparable.
+
+# Cell type maps
+
+`VizSpatial()` colours the spots by the score of one cell type. With
+`censor = TRUE`, scores below their median are set to the median, so that
+the colour scale shows only the spots where a cell type is enriched.
+
+```{r maps, fig.width = 7, fig.height = 8}
+cellTypes <- c("pyramidal SS", "pyramidal CA1", "oligodendrocytes",
+               "interneurons")
+maps <- lapply(cellTypes, function(ct) {
+    VizSpatial(query, reducedDim = ct, censor = TRUE, ptSize = 1,
+               legend.position = "none") +
+        ggplot2::scale_y_reverse() +
+        ggplot2::coord_fixed() +
+        ggplot2::ggtitle(ct)
+})
+ggpubr::ggarrange(plotlist = maps, ncol = 2, nrow = 2)
+```
+
+The pixel row coordinate increases downwards in the image, so we reverse the
+y axis to show the section in its usual orientation.
+
+Pyramidal SS scores are highest in the cortex, along the top and right edges
+of the section, and pyramidal CA1 scores in a thin arc inside it, in the
+hippocampus.
+Oligodendrocyte scores are highest beneath the cortex and in deeper regions,
+consistent with white-matter tracts. The reference contains only cells of the
+cortex and hippocampus. Spots in other brain regions therefore score highest
+for the most similar reference cell types; here, many deep spots score highly
+for interneurons.
+
+# Niches
+
+`findNiches()` clusters the spots by their PhiSpace scores with k-means, after
+a principal component analysis of the scores. Its `seed` argument makes the
+result reproducible without changing the random-number state of the session.
+
+```{r niches}
+query <- findNiches(query, n_niches = 6, verbose = FALSE)
+table(query$spatial_niches)
+```
+
+```{r nicheMap, fig.width = 6, fig.height = 5}
+VizSpatial(query, colBy = "spatial_niches", ptSize = 1.5,
+           legend.title = "Niche") +
+    ggplot2::scale_y_reverse() +
+    ggplot2::coord_fixed()
+```
+
+The heatmap shows the scores of all spots, grouped by niche, and so the cell
+type composition that defines each niche.
+
+```{r nicheHeatmap, fig.height = 6}
+plotPhiSpaceHeatMap(
+    reducedDim(query, "PhiSpace"),
+    queryLabs = query$spatial_niches,
+    cluster_columns = TRUE,
+    name = "Score"
+)
+```
+
+Most niches score highly for one or two cell types. For example, one niche
+scores highly for pyramidal SS and covers the cortex, and another scores
+highly for oligodendrocytes. The niche map and the cell type maps above show
+the same regions.
+
+# Session information
+
+```{r session}
+sessionInfo()
+```

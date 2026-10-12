@@ -12,6 +12,11 @@ template:
     bootswatch: cosmo
 
 articles:
+  - title: "Get started"
+    desc: "Short examples on Bioconductor data; these are the package vignettes."
+    contents:
+      - PhiSpace
+      - PhiSpaceST
   - title: "PhiSpace multiomics: using PhiSpace for single-cell multiomics"
     desc: "Using bulk or single-cell RNA-seq references to annotate single-cell multiomics queries."
     contents:
