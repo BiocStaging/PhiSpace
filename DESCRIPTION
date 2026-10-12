@@ -1,6 +1,6 @@
 Package: PhiSpace
 Title: Continuous cell state annotation for single-cell and spatial omics data
-Version: 1.1.0.9000
+Version: 0.99.0
 Authors@R: 
     person("Jiadong", "Mao", , "chiatungmao@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-3818-1981"))
@@ -39,5 +39,7 @@ Suggests:
     pls,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+biocViews: Software, SingleCell, Spatial, Transcriptomics, GeneExpression,
+    CellBiology, Classification, Regression, DimensionReduction, Clustering
 URL: https://mao-lab-org.github.io/PhiSpace/, https://github.com/mao-lab-org/PhiSpace
 BugReports: https://github.com/mao-lab-org/PhiSpace/issues

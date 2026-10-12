@@ -1,4 +1,8 @@
-# PhiSpace 1.1.0.9000
+# PhiSpace 0.99.0
+
+The version number drops from 1.1.0.9000 to 0.99.0 because Bioconductor
+requires new submissions to use 0.99.z. The changes below are relative to
+PhiSpace 1.1.0, the release archived on Zenodo.
 
 ## Changes that can alter results
 

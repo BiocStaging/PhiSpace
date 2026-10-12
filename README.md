@@ -11,6 +11,9 @@ if(!requireNamespace("BiocManager", quietly = TRUE)) {
 BiocManager::install('mao-lab-org/PhiSpace')
 ```
 
+While PhiSpace is prepared for Bioconductor, its version is 0.99.z, as Bioconductor
+requires for new packages. These versions are newer than PhiSpace 1.1.0.
+
 
 
 ## What is Φ-Space?
