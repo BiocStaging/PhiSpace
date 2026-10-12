@@ -1,0 +1,49 @@
+metric	value	tolerance
+kde_n_clones	16	0
+kde_estimate_min	0	1.0e-15
+kde_estimate_max	7.29609225839616e-08	7.3e-13
+kde_estimate_sum	0.00188705464979789	1.9e-08
+barcode_k2_tot_withinss	25451415.0908739	2.5e+02
+barcode_k3_tot_withinss	17464064.2416163	1.7e+02
+barcode_k4_tot_withinss	13659816.646123	1.4e+02
+barcode_k5_tot_withinss	11392994.8714716	1.1e+02
+barcode_k6_tot_withinss	9666476.48960648	9.7e+01
+barcode_k7_tot_withinss	8337616.48208793	8.3e+01
+barcode_k8_tot_withinss	7340703.32075673	7.3e+01
+barcode_k9_tot_withinss	6636118.31463362	6.6e+01
+barcode_k10_tot_withinss	6168431.61299178	6.2e+01
+phi_n_bins	15454	0
+phi_n_celltypes	70	0
+phi_celltypes_sha256	149a366f073c7fff17335a289e581f924421891b8d6f78c16339eeb4695768b6	
+phi_bins_sha256	32cf3a282186371a3a7867ef215f92f36bc2d84635c10a77d33470783c8a565c	
+phi_norm_mean	0.00611590544522134	2.2e-06
+phi_norm_sd	0.220692836802198	2.2e-06
+phi_norm_sd_Neutro(Spleen)	0.214097933197722	2.1e-06
+phi_norm_sd_Granulo(BM)	0.206870892199883	2.1e-06
+phi_norm_sd_T2(Neutro)	0.246642289917477	2.5e-06
+phi_norm_sd_ErythBla(BM)	0.199194234099224	2.0e-06
+phi_norm_sd_Macro(Spleen)	0.187062850866801	1.9e-06
+phi_norm_sd_Naive B(BM)	0.16153362916104	1.6e-06
+phi_cluster_size_rank1	1088	11
+phi_cluster_size_rank2	1196	12
+phi_cluster_size_rank3	1670	17
+phi_cluster_size_rank4	1806	19
+phi_cluster_size_rank5	2069	21
+phi_cluster_size_rank6	2082	21
+phi_cluster_size_rank7	2215	23
+phi_cluster_size_rank8	3328	34
+phi_cluster_tot_withinss	30868.4657743635	3.1e-01
+gex_cluster_size_rank1	1108	12
+gex_cluster_size_rank2	1427	15
+gex_cluster_size_rank3	1467	15
+gex_cluster_size_rank4	1762	18
+gex_cluster_size_rank5	1800	18
+gex_cluster_size_rank6	1877	19
+gex_cluster_size_rank7	2755	28
+gex_cluster_size_rank8	3258	33
+gex_cluster_tot_withinss	495277.146668832	5.0e+00
+sig_n_celltypes	70	0
+sig_niches	2,3,5,6,7,8,10	
+sig_min	-257.31520591868	2.6e-03
+sig_max	314.18815221336	3.1e-03
+sig_abs_sum	3818.32341278063	3.8e-02
