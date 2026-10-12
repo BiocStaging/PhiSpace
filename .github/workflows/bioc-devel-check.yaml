@@ -1,0 +1,85 @@
+name: Bioconductor devel check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  # Bioconductor devel changes without our pushes; check it every Monday.
+  schedule:
+    - cron: '0 3 * * 1'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bioc-devel-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  bioc-devel:
+    # Bioconductor builds a new package with its devel version (R and
+    # Bioconductor). The image has both and installs packages as binaries.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    container: bioconductor/bioconductor_docker:devel
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install dependencies
+        shell: Rscript {0}
+        run: |
+          d <- read.dcf("DESCRIPTION", c("Depends", "Imports", "Suggests", "LinkingTo"))
+          pk <- trimws(sub("\\(.*", "", unlist(strsplit(d[!is.na(d)], ","))))
+          base <- rownames(installed.packages(priority = "base"))
+          pk <- setdiff(pk[pk != ""], c("R", base))
+          BiocManager::install(c(pk, "BiocCheck", "rcmdcheck"),
+                               ask = FALSE, update = FALSE)
+          missing <- setdiff(c(pk, "BiocCheck", "rcmdcheck"),
+                             rownames(installed.packages()))
+          if (length(missing)) stop("Not installed: ", toString(missing))
+          sessionInfo()
+          cat("BiocCheck", format(packageVersion("BiocCheck")), "\n")
+
+      # Bioconductor requires no ERROR or WARNING; each check step fails on one.
+      - name: BiocCheckGitClone
+        shell: Rscript {0}
+        run: |
+          res <- BiocCheck::BiocCheckGitClone(".")
+          if (res$getNum("error") + res$getNum("warning") > 0)
+              stop("BiocCheckGitClone found ERRORs or WARNINGs")
+
+      - name: R CMD build and check
+        shell: Rscript {0}
+        run: |
+          dir.create("/tmp/check")
+          setwd("/tmp/check")
+          status <- system2("R", c("CMD", "build", Sys.getenv("GITHUB_WORKSPACE")))
+          if (status != 0) stop("R CMD build failed")
+          tarball <- list.files(pattern = "^PhiSpace_.*\\.tar\\.gz$")
+          if (length(tarball) != 1) stop("R CMD build did not make a tarball")
+          rcmdcheck::rcmdcheck(tarball, args = "--no-manual",
+                               check_dir = ".", error_on = "warning")
+
+      # --no-check-bioc-help skips the support-site and bioc-devel checks.
+      # Remove it once the maintainer is registered on support.bioconductor.org
+      # and subscribed to bioc-devel.
+      - name: BiocCheck
+        shell: Rscript {0}
+        run: |
+          setwd("/tmp/check")
+          tarball <- list.files(pattern = "^PhiSpace_.*\\.tar\\.gz$")
+          res <- BiocCheck::BiocCheck(tarball, `new-package` = TRUE,
+                                      `no-check-bioc-help` = TRUE)
+          if (res$getNum("error") + res$getNum("warning") > 0)
+              stop("BiocCheck found ERRORs or WARNINGs")
+
+      - name: Upload check results
+        if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: bioc-devel-check
+          path: |
+            /tmp/check/PhiSpace.Rcheck
+            /tmp/check/PhiSpace.BiocCheck
+          if-no-files-found: ignore

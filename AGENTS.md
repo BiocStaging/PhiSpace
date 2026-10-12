@@ -442,6 +442,16 @@ Done on 2026-10-07 with this procedure:
 
 - Package check: `.github/workflows/R-CMD-check.yaml`, displayed as
   **R CMD check** (added 2026-10-08; see Known Check Notes).
+- Bioconductor devel check: `.github/workflows/bioc-devel-check.yaml`,
+  displayed as **Bioconductor devel check** (added 2026-10-12). It runs
+  BiocCheckGitClone, R CMD build, R CMD check and BiocCheck (new package) in
+  the `bioconductor/bioconductor_docker:devel` image, on pushes to `main`,
+  pull requests, manual dispatch and every Monday, and fails on any ERROR or
+  WARNING. BiocCheck skips the support-site and bioc-devel checks
+  (`no-check-bioc-help`) until the maintainer has registered. The first local
+  run found that scuttle and scran in Bioconductor 3.24 deprecate
+  `logNormCounts()` and `findMarkers()`; see `logNormTransf()` and the
+  `scoreCells()` default.
 - Workflow: `.github/workflows/vignettes-pages.yaml`, displayed in Actions as
   **Build and publish vignettes**.
 - It runs on pushes to `main`, pull requests, and manual dispatch. Pull requests
