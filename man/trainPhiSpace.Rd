@@ -160,8 +160,8 @@ and a larger model.
 }
 \examples{
 set.seed(1)
-ref <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 200, ngenes = 300))
-query <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 100, ngenes = 300))
+ref <- logNormTransf(scuttle::mockSCE(ncells = 200, ngenes = 300))
+query <- logNormTransf(scuttle::mockSCE(ncells = 100, ngenes = 300))
 model <- trainPhiSpace(ref, phenotypes = "Cell_Cycle", refAssay = "logcounts",
                        ncomp = 3, referenceName = "mock reference")
 model

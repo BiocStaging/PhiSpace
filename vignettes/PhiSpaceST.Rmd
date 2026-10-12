@@ -66,7 +66,7 @@ query <- Visium_mouseCoronal()
 query <- query[, query$in_tissue == 1]
 rownames(query) <- rowData(query)$gene_name
 query <- query[!duplicated(rownames(query)), ]
-query <- scuttle::logNormCounts(query)
+query <- logNormTransf(query)
 query
 ```
 
@@ -77,7 +77,7 @@ major cell types in the column `level1class`.
 
 ```{r reference, message = FALSE}
 reference <- fetchDataset("zeisel-brain-2015", "2023-12-14")
-reference <- scuttle::logNormCounts(reference)
+reference <- logNormTransf(reference)
 table(reference$level1class)
 ```
 

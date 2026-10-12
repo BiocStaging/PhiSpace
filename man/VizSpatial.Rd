@@ -70,8 +70,8 @@ The 2D spatial coordinates (x and y) should be stored as two columns in colData.
 }
 \examples{
 set.seed(1)
-ref <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 200, ngenes = 300))
-query <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 100, ngenes = 300))
+ref <- logNormTransf(scuttle::mockSCE(ncells = 200, ngenes = 300))
+query <- logNormTransf(scuttle::mockSCE(ncells = 100, ngenes = 300))
 spe <- SpatialExperiment::SpatialExperiment(
   assays = list(logcounts = logcounts(query)),
   spatialCoords = cbind(x = runif(100), y = runif(100))

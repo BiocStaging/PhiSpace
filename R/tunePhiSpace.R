@@ -30,7 +30,7 @@
 #' # ncomp and nfeat, so it runs only in an interactive session.
 #' if (interactive()) {
 #'   set.seed(1)
-#'   ref <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 200, ngenes = 300))
+#'   ref <- logNormTransf(scuttle::mockSCE(ncells = 200, ngenes = 300))
 #'   tuned <- tunePhiSpace(ref, assayName = "logcounts", phenotypes = "Cell_Cycle",
 #'                         ncompGrid = 1:4, nfeatV = c(20, 50), Kfolds = 3)
 #'   tuned$ncomp

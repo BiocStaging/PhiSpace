@@ -113,7 +113,7 @@ technologies. We first keep the genes measured in both datasets.
 genes <- intersect(rownames(reference), rownames(query))
 length(genes)
 reference <- RankTransf(reference[genes, ], "logcounts", sparse = FALSE)
-query <- scuttle::logNormCounts(query[genes, ])
+query <- logNormTransf(query[genes, ])
 query <- RankTransf(query, "logcounts")
 ```
 

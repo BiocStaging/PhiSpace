@@ -40,7 +40,7 @@ Spatially-aware subsampling of SpatialExperiment objects
 }
 \examples{
 set.seed(1)
-sce <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 300, ngenes = 50))
+sce <- logNormTransf(scuttle::mockSCE(ncells = 300, ngenes = 50))
 spe <- SpatialExperiment::SpatialExperiment(
   assays = list(logcounts = logcounts(sce)),
   spatialCoords = cbind(x = runif(300), y = runif(300))
