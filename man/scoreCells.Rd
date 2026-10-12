@@ -11,7 +11,7 @@ scoreCells(
   assay_ref = "logcounts",
   assay_query = "logcounts",
   signature_genes = NULL,
-  signature_method = c("findMarkers", "mean"),
+  signature_method = c("mean", "findMarkers"),
   marker_test = c("t", "wilcox", "binom"),
   marker_pval_type = "any",
   marker_direction = c("up", "down", "any"),
@@ -49,10 +49,12 @@ reference classes. Supplied signatures are used as-is after removing
 duplicates and genes unavailable in either assay; marker-selection and
 housekeeping-removal arguments are ignored.}
 
-\item{signature_method}{Character. Signature selection method. \code{"findMarkers"}
+\item{signature_method}{Character. Signature selection method. \code{"mean"}
+(default) uses mean-expression ranking for every class. \code{"findMarkers"}
 uses \code{scran::findMarkers()} for multi-class references and falls back to
-mean-expression ranking for single-class references. \code{"mean"} uses
-mean-expression ranking for every class.}
+mean-expression ranking for single-class references. scran deprecates
+\code{findMarkers()} in Bioconductor 3.24, so this option will be removed when
+scran removes the function.}
 
 \item{marker_test}{Character. Test type passed to \code{scran::findMarkers()}.}
 

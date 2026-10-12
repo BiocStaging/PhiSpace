@@ -18,10 +18,12 @@
 #'   reference classes. Supplied signatures are used as-is after removing
 #'   duplicates and genes unavailable in either assay; marker-selection and
 #'   housekeeping-removal arguments are ignored.
-#' @param signature_method Character. Signature selection method. `"findMarkers"`
+#' @param signature_method Character. Signature selection method. `"mean"`
+#'   (default) uses mean-expression ranking for every class. `"findMarkers"`
 #'   uses `scran::findMarkers()` for multi-class references and falls back to
-#'   mean-expression ranking for single-class references. `"mean"` uses
-#'   mean-expression ranking for every class.
+#'   mean-expression ranking for single-class references. scran deprecates
+#'   `findMarkers()` in Bioconductor 3.24, so this option will be removed when
+#'   scran removes the function.
 #' @param marker_test Character. Test type passed to `scran::findMarkers()`.
 #' @param marker_pval_type Character. `pval.type` passed to
 #'   `scran::findMarkers()`.
@@ -82,7 +84,7 @@ scoreCells <- function(reference,
                        assay_ref = "logcounts",
                        assay_query = "logcounts",
                        signature_genes = NULL,
-                       signature_method = c("findMarkers", "mean"),
+                       signature_method = c("mean", "findMarkers"),
                        marker_test = c("t", "wilcox", "binom"),
                        marker_pval_type = "any",
                        marker_direction = c("up", "down", "any"),

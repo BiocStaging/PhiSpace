@@ -256,6 +256,12 @@ PhiSpace 1.1.0, the release archived on Zenodo.
 
 ## scoreCells()
 
+* `scoreCells()` now selects signature genes by mean expression by default
+  (`signature_method = "mean"`). The previous default, `"findMarkers"`,
+  calls `scran::findMarkers()`, which Bioconductor 3.24 deprecates. Results
+  change for multi-class references unless `signature_method = "findMarkers"`
+  is given; this includes the `PhiSpace()` fallback when
+  `fallback_min_classes` is above 2.
 * `scoreCells()` now calculates each class's correlation score using that
   class's effective signature genes. Previous versions used every gene shared
   by the reference and query.

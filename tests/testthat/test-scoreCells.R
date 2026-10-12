@@ -389,3 +389,21 @@ test_that("correlation scores of cells with missing values are unchanged", {
     }
   }
 })
+
+test_that("scoreCells selects signatures by mean expression by default", {
+  fixture <- make_scorecells_fixture()
+  args <- list(fixture$reference, fixture$query, class_col = "celltype",
+               n_top_genes = 4, n_signature_genes = 2, verbose = FALSE)
+
+  out_default <- do.call(scoreCells, args)
+  out_mean <- do.call(scoreCells, c(args, signature_method = "mean"))
+
+  expect_identical(
+    S4Vectors::metadata(out_default)$scoreCells$params$signature_method,
+    "mean"
+  )
+  expect_identical(
+    SingleCellExperiment::reducedDims(out_default),
+    SingleCellExperiment::reducedDims(out_mean)
+  )
+})
