@@ -35,7 +35,7 @@
 #'   Default is TRUE.
 #' @param scale Logical indicating whether to scale data before PCA.
 #'   Default is FALSE.
-#' @param seed Integer seed for reproducibility. Default is NULL (no seed set).
+#' @param seed Integer seed for reproducibility. Default is NULL (no seed set). The function sets the seed with [withr::local_seed()], so the session's random-number state is restored on exit.
 #' @param silhouette_max_cells Number or `Inf`. With the silhouette method,
 #'   the silhouette widths need a distance matrix whose size grows with the
 #'   square of the number of cells (about 0.4 GB for 10,000 cells and 40 GB
@@ -170,7 +170,7 @@ clusterPhiSpace <- function(
 
   # Set seed if provided
   if (!is.null(seed)) {
-    set.seed(seed)
+    withr::local_seed(seed)
   }
 
   # Determine input type and extract data

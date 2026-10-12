@@ -6,6 +6,12 @@ PhiSpace 1.1.0, the release archived on Zenodo.
 
 ## Changes that can alter results
 
+* Functions with a `seed` argument (`findNiches()`, `clusterPhiSpace()`,
+  `rankFeatures()`, `spatialSampler()`, `subsample()`, `pseudoBulk()` and
+  `tunePhiSpace()`) now set the seed with `withr::local_seed()` and restore
+  the session's random-number state on exit. Their own results are
+  unchanged, but random numbers drawn after the call differ from before,
+  when the call left the generator in the state given by its seed.
 * `getPC()` now computes `totVar`, `props` and `accuProps` from the centred
   (and, if requested, scaled) data that it decomposes. Previous versions divided
   by the total variance of the raw data, so the proportions were too small

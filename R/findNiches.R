@@ -16,7 +16,7 @@
 #' @param kmeans_iter Integer. Maximum number of iterations for k-means (default: 500).
 #' @param kmeans_nstart Integer. Number of random starts for k-means (default: 20).
 #' @param kmeans_algorithm Character. Algorithm for k-means clustering (default: "Lloyd").
-#' @param seed Integer. Random seed for reproducibility (default: 94863).
+#' @param seed Integer. Random seed for reproducibility (default: 94863). The function sets the seed with [withr::local_seed()], so the session's random-number state is restored on exit.
 #' @param store_pca Logical. Whether to store PCA results in the object (default: FALSE).
 #' @param pca_name Character. Name for stored PCA results if store_pca = TRUE (default: "PhiSpace_PCA").
 #' @param verbose Logical. Whether to report progress and niche sizes with
@@ -154,7 +154,7 @@ findNiches <- function(spe,
   }
 
   # Set seed for reproducibility
-  set.seed(seed)
+  withr::local_seed(seed)
 
   # Perform clustering for each k
   cluster_results <- list()

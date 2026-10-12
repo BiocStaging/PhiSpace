@@ -51,7 +51,7 @@ CVTune_ncomp(
 
 \item{Ncores}{Integer.}
 
-\item{seed}{Integer.}
+\item{seed}{Integer. The function sets the seed with \code{\link[withr:with_seed]{withr::local_seed()}}, so the session's random-number state is restored on exit.}
 }
 \value{
 A list.

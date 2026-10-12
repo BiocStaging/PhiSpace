@@ -33,7 +33,8 @@ Imports:
     FNN,
     S4Vectors,
     kerndwd,
-    umap
+    umap,
+    withr
 Suggests: 
     cluster,
     pls,

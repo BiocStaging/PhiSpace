@@ -73,7 +73,7 @@ tunePhiSpace(
 
 \item{Ncores}{Integer.}
 
-\item{seed}{Integer.}
+\item{seed}{Integer. The function sets the seed with \code{\link[withr:with_seed]{withr::local_seed()}}, so the session's random-number state is restored on exit.}
 
 \item{cellTypeThreshold}{Integer or NULL. If a positive integer, cell types with fewer than this many cells in the reference will be removed before tuning. Only used when \code{phenotypes} is provided. Default is \code{NULL} (no filtering).}
 }

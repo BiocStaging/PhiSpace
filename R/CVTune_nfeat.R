@@ -9,7 +9,7 @@
 #' @param gridSize Integer.
 #' @param nfeatV Vector.
 #' @param Kfolds Integer.
-#' @param seed Integer.
+#' @param seed Integer. The function sets the seed with [withr::local_seed()], so the session's random-number state is restored on exit.
 #' @param regMethod Character.
 #' @param Ncores Integer.
 #' @param labelCode Character.
@@ -103,7 +103,7 @@ CVTune_nfeat <- function(reference,
 
   ## CV
   # Create data partition
-  set.seed(seed)
+  withr::local_seed(seed)
   Nsamples <- nrow(XX)
   allIdx <- 1:Nsamples # indices of all samples
   permuIdx <- sample(allIdx, Nsamples) # random permutation of allIdx

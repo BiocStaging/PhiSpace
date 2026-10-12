@@ -68,7 +68,7 @@ Default is TRUE.}
 \item{scale}{Logical indicating whether to scale data before PCA.
 Default is FALSE.}
 
-\item{seed}{Integer seed for reproducibility. Default is NULL (no seed set).}
+\item{seed}{Integer seed for reproducibility. Default is NULL (no seed set). The function sets the seed with \code{\link[withr:with_seed]{withr::local_seed()}}, so the session's random-number state is restored on exit.}
 
 \item{silhouette_max_cells}{Number or \code{Inf}. With the silhouette method,
 the silhouette widths need a distance matrix whose size grows with the

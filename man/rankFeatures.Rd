@@ -50,7 +50,7 @@ Not used for DWD.}
 
 \item{dwd_params}{List of parameters for DWD method (see Details).}
 
-\item{seed}{Integer seed for reproducibility. Default is NULL.}
+\item{seed}{Integer seed for reproducibility. Default is NULL. The function sets the seed with \code{\link[withr:with_seed]{withr::local_seed()}}, so the session's random-number state is restored on exit.}
 }
 \value{
 A list with class "FeatureRanking" containing:

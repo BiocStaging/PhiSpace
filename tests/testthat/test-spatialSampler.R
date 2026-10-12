@@ -45,3 +45,16 @@ test_that("spatialSampler validates its inputs", {
   sce <- SingleCellExperiment::SingleCellExperiment(list(counts = matrix(1, 2, 2)))
   expect_error(spatialSampler(sce), "must be a SpatialExperiment")
 })
+
+test_that("a seed gives the same sample and leaves the session's random state alone", {
+  spe <- make_spatial_fixture()
+  set.seed(42)
+  before <- .Random.seed
+  a <- spatialSampler(spe, prop = 0.2, method = "random", seed = 7, verbose = FALSE)
+  expect_identical(.Random.seed, before)
+
+  # The sample is the one that set.seed(7) gives, as before the change.
+  set.seed(7)
+  expected <- sample(colnames(spe), round(0.2 * ncol(spe)))
+  expect_setequal(colnames(a), expected)
+})

@@ -7,7 +7,7 @@
 #' @param assayName Assay used for pseudobulking.
 #' @param resampSizes How many pseudo-bulk resamples to generate from each cluster.
 #' @param proportion Used to determine unequal resampSizes.
-#' @param seed Random seeds
+#' @param seed Random seeds. The function sets the seed with [withr::local_seed()], so the session's random-number state is restored on exit.
 #' @param nPool How many cells to use for pseudobulking.
 #' @param calcMean Logical. Calculate mean of sum of expression for pseudobulking.
 #'
@@ -68,7 +68,7 @@ pseudoBulk <- function(
     resampSizes <- ceiling(clustSizes * proportion)
   }
   # Resample
-  set.seed(seed)
+  withr::local_seed(seed)
   resampIdx <- lapply(
     1:Ncluster,
     function(x){

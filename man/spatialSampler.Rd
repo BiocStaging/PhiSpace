@@ -24,7 +24,7 @@ spatialSampler(
 
 \item{grid_size}{Number of grid cells per dimension for grid method (default: auto-calculated)}
 
-\item{seed}{Random seed for reproducibility (default: 123)}
+\item{seed}{Random seed for reproducibility (default: 123). The function sets the seed with \code{\link[withr:with_seed]{withr::local_seed()}}, so the session's random-number state is restored on exit.}
 
 \item{min_cells_per_region}{Minimum cells required per spatial region (default: 1)}
 

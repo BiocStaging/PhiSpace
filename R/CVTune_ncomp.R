@@ -8,7 +8,7 @@
 #' @param selectedFeat Vector.
 #' @param assayName Character.
 #' @param Kfolds Integer.
-#' @param seed Integer.
+#' @param seed Integer. The function sets the seed with [withr::local_seed()], so the session's random-number state is restored on exit.
 #' @param regMethod Character.
 #' @param Ncores Integer.
 #' @param labelCode Character.
@@ -65,7 +65,7 @@ CVTune_ncomp <- function(reference,
 
   ## Cross-validation
   # Create data partition
-  set.seed(seed)
+  withr::local_seed(seed)
   Nsamples <- nrow(XX)
   allIdx <- 1:Nsamples # indices of all samples
   permuIdx <- sample(allIdx, Nsamples) # random permutation of allIdx

@@ -26,7 +26,7 @@
 #' @param center Logical indicating whether to center features. Default is TRUE.
 #' @param scale Logical indicating whether to scale features. Default is FALSE.
 #' @param dwd_params List of parameters for DWD method (see Details).
-#' @param seed Integer seed for reproducibility. Default is NULL.
+#' @param seed Integer seed for reproducibility. Default is NULL. The function sets the seed with [withr::local_seed()], so the session's random-number state is restored on exit.
 #'
 #' @return A list with class "FeatureRanking" containing:
 #'   \item{method}{The method used}
@@ -105,7 +105,7 @@ rankFeatures <- function(data,
   source <- match.arg(source)
 
   if (!is.null(seed)) {
-    set.seed(seed)
+    withr::local_seed(seed)
   }
 
   # Extract feature matrix

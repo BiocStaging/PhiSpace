@@ -4,7 +4,7 @@
 #' @param key Required for stratefied subsampling
 #' @param proportion Proportion of cells to sample
 #' @param minCellNum Minimum number of cells in each category
-#' @param seed Random seed
+#' @param seed Random seed. The function sets the seed with [withr::local_seed()], so the session's random-number state is restored on exit.
 #'
 #' @return A downsized SCE object
 #' @export
@@ -21,7 +21,7 @@ subsample <- function(
     sceSize <- ncol(sce)
     outSize <- max(1, ceiling(sceSize * proportion) )
 
-    set.seed(seed)
+    withr::local_seed(seed)
     idx <- sample(
       1:ncol(sce),
       outSize
@@ -34,7 +34,7 @@ subsample <- function(
     keys <- as.character(colData(sce)[,key])
     keyNames <- unique(keys)
 
-    set.seed(seed)
+    withr::local_seed(seed)
     idx_list <- lapply(
       keyNames,
       function(keyName){

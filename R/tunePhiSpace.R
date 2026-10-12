@@ -21,7 +21,7 @@
 #' @param regMethod Character.
 #' @param labelCode Character.
 #' @param Ncores Integer.
-#' @param seed Integer.
+#' @param seed Integer. The function sets the seed with [withr::local_seed()], so the session's random-number state is restored on exit.
 #' @param cellTypeThreshold Integer or NULL. If a positive integer, cell types with fewer than this many cells in the reference will be removed before tuning. Only used when `phenotypes` is provided. Default is `NULL` (no filtering).
 #'
 #' @return A list

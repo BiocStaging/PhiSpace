@@ -36,7 +36,7 @@ pseudoBulk(
 
 \item{nPool}{How many cells to use for pseudobulking.}
 
-\item{seed}{Random seeds}
+\item{seed}{Random seeds. The function sets the seed with \code{\link[withr:with_seed]{withr::local_seed()}}, so the session's random-number state is restored on exit.}
 }
 \value{
 An updated \code{SingleCellExpeirment} object with a pseudobulk assay.

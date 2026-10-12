@@ -44,7 +44,7 @@ If NULL, defaults to half the number of cell types in PhiSpace scores.}
 
 \item{kmeans_algorithm}{Character. Algorithm for k-means clustering (default: "Lloyd").}
 
-\item{seed}{Integer. Random seed for reproducibility (default: 94863).}
+\item{seed}{Integer. Random seed for reproducibility (default: 94863). The function sets the seed with \code{\link[withr:with_seed]{withr::local_seed()}}, so the session's random-number state is restored on exit.}
 
 \item{store_pca}{Logical. Whether to store PCA results in the object (default: FALSE).}
 

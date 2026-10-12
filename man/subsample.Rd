@@ -15,7 +15,7 @@ subsample(sce, key = NULL, proportion = 0.1, minCellNum = 50, seed = 5202056)
 
 \item{minCellNum}{Minimum number of cells in each category}
 
-\item{seed}{Random seed}
+\item{seed}{Random seed. The function sets the seed with \code{\link[withr:with_seed]{withr::local_seed()}}, so the session's random-number state is restored on exit.}
 }
 \value{
 A downsized SCE object

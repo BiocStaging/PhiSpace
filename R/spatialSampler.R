@@ -9,7 +9,7 @@
 #' @param prop Proportion of cells to sample (between 0 and 1)
 #' @param method Sampling method: "grid", "kmeans", or "random" (default: "grid")
 #' @param grid_size Number of grid cells per dimension for grid method (default: auto-calculated)
-#' @param seed Random seed for reproducibility (default: 123)
+#' @param seed Random seed for reproducibility (default: 123). The function sets the seed with [withr::local_seed()], so the session's random-number state is restored on exit.
 #' @param min_cells_per_region Minimum cells required per spatial region (default: 1)
 #' @param balance_regions Whether to balance sampling across spatial regions (default: FALSE; if true, might create duplicated spatial units)
 #' @param verbose Whether to report progress with [message()] (default: TRUE)
@@ -39,7 +39,7 @@ spatialSampler <- function(spe,
     stop("method must be 'grid', 'kmeans', or 'random'")
   }
 
-  set.seed(seed)
+  withr::local_seed(seed)
 
   # Get spatial coordinates
   coords_matrix <- spatialCoords(spe)
