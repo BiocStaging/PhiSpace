@@ -196,6 +196,12 @@
 
 ## Other changes
 
+* The package moved to its own repository, `github.com/mao-lab-org/PhiSpace`,
+  with the package at the root. Install it with
+  `BiocManager::install("mao-lab-org/PhiSpace")`. The website moved to
+  `https://mao-lab-org.github.io/PhiSpace/`; the old address redirects there.
+  `jiadongm/PhiSpace` keeps the papers' analysis code, and its `pkg/` folder
+  is no longer updated.
 * The package now cites the published papers: Mao et al. (2025), *Genome
   Biology* 26, 323 (doi:10.1186/s13059-025-03755-8), and Mao et al. (2026),
   *Cell Reports Methods* 6(8), 101483 (doi:10.1016/j.crmeth.2026.101483).

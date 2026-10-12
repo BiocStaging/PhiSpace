@@ -42,4 +42,5 @@ Suggests:
 Remotes: 
     ByronSyun/vizOmics
 Config/testthat/edition: 3
-URL: https://jiadongm.github.io/PhiSpace/
+URL: https://mao-lab-org.github.io/PhiSpace/, https://github.com/mao-lab-org/PhiSpace
+BugReports: https://github.com/mao-lab-org/PhiSpace/issues

@@ -8,7 +8,7 @@ Installing Bioconductor dependencies and then PhiSpace:
 if(!requireNamespace("BiocManager", quietly = TRUE)) {
   install.packages("BiocManager")
 }
-BiocManager::install('jiadongm/PhiSpace/pkg')
+BiocManager::install('mao-lab-org/PhiSpace')
 ```
 
 

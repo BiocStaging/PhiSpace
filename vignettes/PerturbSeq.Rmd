@@ -34,7 +34,7 @@ We used
 Load the packages.
 ```{r}
 # Install latest version of PhiSpace from github
-# suppressMessages(BiocManager::install("jiadongm/PhiSpace/pkg"))
+# suppressMessages(BiocManager::install("mao-lab-org/PhiSpace"))
 # Load packages and predefined quantities
 suppressPackageStartupMessages(library(PhiSpace))
 suppressPackageStartupMessages(library(vizOmics))
