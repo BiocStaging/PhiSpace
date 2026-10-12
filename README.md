@@ -41,14 +41,14 @@ We have applied Φ-Space to many different use cases, including
 
 | Reference     |      Query    | Note   | Vignettes |
 | :------ |    :------   | :------  | :------ |
-| bulk RNA-seq  |   scRNA-seq   | Dendritic cell development   | [Stemformatics DC atlas](articles/getting_started.html) |
-| bulk RNA-seq  |   scRNA-seq (Perturb-seq)   | T cell states development  | [Perturb-seq](articles/PerturbSeq.html) |
+| bulk RNA-seq  |   scRNA-seq   | Dendritic cell development   | [Stemformatics DC atlas](https://mao-lab-org.github.io/PhiSpace/articles/getting_started.html) |
+| bulk RNA-seq  |   scRNA-seq (Perturb-seq)   | T cell states development  | [Perturb-seq](https://mao-lab-org.github.io/PhiSpace/articles/PerturbSeq.html) |
 | scRNA-seq     |   scRNA-seq   |  | TBC |
-| scRNA-seq     |   scATAC-seq  | requires a bimodal bridge dataset | [Bridge annotation](articles/BridgeAnnotation.html) |
-| CITE-seq (scRNA+Protein-seq)  |  CITE-seq   | using both modalities | [Covid CITE-seq](articles/CITE-seq.html) |
-| scRNA-seq    |   supercellular spatial RNA-seq | e.g. 10x Visium, Slide-seqV2 | [Cell type deconvolution for Visium](articles/Visium.html) |
-| scRNA-seq    |   subcellular spatial RNA-seq (imaging-based) | e.g. CosMx, 10x Xenium | [CosMx lung cancer microenvironment](articles/CosMx.html) |
-| scRNA-seq    |   subcellular spatial RNA-seq (sequencing-based) | e.g. Stereo-seq, 10x Visium HD | [Stereo-seq AML mouse spleen with cancer lieage tracing](articles/StereoSeq.html) |
+| scRNA-seq     |   scATAC-seq  | requires a bimodal bridge dataset | [Bridge annotation](https://mao-lab-org.github.io/PhiSpace/articles/BridgeAnnotation.html) |
+| CITE-seq (scRNA+Protein-seq)  |  CITE-seq   | using both modalities | [Covid CITE-seq](https://mao-lab-org.github.io/PhiSpace/articles/CITE-seq.html) |
+| scRNA-seq    |   supercellular spatial RNA-seq | e.g. 10x Visium, Slide-seqV2 | [Cell type deconvolution for Visium](https://mao-lab-org.github.io/PhiSpace/articles/Visium.html) |
+| scRNA-seq    |   subcellular spatial RNA-seq (imaging-based) | e.g. CosMx, 10x Xenium | [CosMx lung cancer microenvironment](https://mao-lab-org.github.io/PhiSpace/articles/CosMx.html) |
+| scRNA-seq    |   subcellular spatial RNA-seq (sequencing-based) | e.g. Stereo-seq, 10x Visium HD | [Stereo-seq AML mouse spleen with cancer lieage tracing](https://mao-lab-org.github.io/PhiSpace/articles/StereoSeq.html) |
 
 
 
