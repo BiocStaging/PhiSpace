@@ -1,10 +1,10 @@
 ---
-title: "Stored models: train once, annotate many queries"
+title: "Pretrain PhiSpace models: train once, annotate later"
 author: "Jiadong Mao"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Stored models: train once, annotate many queries}
+  %\VignetteIndexEntry{Pretrain PhiSpace models: train once, annotate later}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

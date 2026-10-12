@@ -94,13 +94,13 @@ PhiSpace 1.1.0, the release archived on Zenodo.
   mixes models and reference objects. A model is restricted once to the genes
   shared by all queries, as above; `updateRef = TRUE` is not available for a
   model.
-* New vignette "Stored models: train once, annotate many queries". It trains
-  models on the four whole-transcriptome lung references of the CosMx
+* New vignette "Pretrain PhiSpace models: train once, annotate later". It
+  trains models on the four whole-transcriptome lung references of the CosMx
   vignette with `nfeat = 500`, applies them to the 960-gene CosMx panel, and
-  compares them with the per-query fit: median correlation per cell type
-  0.998 to 0.9995, the same top cell type for 96% to 97% of cells per model,
-  and niches with an adjusted Rand index of 0.97. Models trained on the
-  panel genes give the same scores as the per-query fit.
+  compares them with the per-query fit: median correlation per cell type 0.998
+  to 0.9995, the same top cell type for 96% to 97% of cells per model, and
+  niches with an adjusted Rand index of 0.97. Models trained on the panel
+  genes give the same scores as the per-query fit.
 
 ## Memory and speed
 
