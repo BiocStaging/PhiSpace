@@ -12,7 +12,9 @@ Continuous phenotyping of bulk, single-cell and spatial omics data using partial
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://jiadongm.github.io/PhiSpace/}
+  \item \url{https://mao-lab-org.github.io/PhiSpace/}
+  \item \url{https://github.com/mao-lab-org/PhiSpace}
+  \item Report bugs at \url{https://github.com/mao-lab-org/PhiSpace/issues}
 }
 
 }
