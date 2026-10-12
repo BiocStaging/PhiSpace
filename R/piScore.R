@@ -28,6 +28,10 @@
 #'   gene selection and ranking. \emph{Bioinformatics} 30(6):801-807.
 #'   \doi{10.1093/bioinformatics/btr671}
 #'
+#' @examples
+#' de <- data.frame(gene = c("g1", "g2", "g3"), avg_log2FC = c(2, -1, 0.5),
+#'                  p_val_adj = c(1e-10, 0.01, 0.5))
+#' piScore(de, rank = TRUE)
 #' @export
 piScore <- function(de_results,
                     logfc_col = "avg_log2FC",

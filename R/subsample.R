@@ -7,6 +7,13 @@
 #' @param seed Random seed. The function sets the seed with [withr::local_seed()], so the session's random-number state is restored on exit.
 #'
 #' @return A downsized SCE object
+#' @examples
+#' sce <- scuttle::mockSCE(ncells = 200, ngenes = 10)
+#' small <- subsample(sce, proportion = 0.2)
+#' ncol(small)
+#' # Stratified by a colData column, keeping at least 20 cells per class.
+#' strat <- subsample(sce, key = "Cell_Cycle", proportion = 0.1, minCellNum = 20)
+#' table(strat$Cell_Cycle)
 #' @export
 subsample <- function(
     sce,

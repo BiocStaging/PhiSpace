@@ -97,42 +97,17 @@
 #' - **Forgy**: Similar to Lloyd
 #'
 #' @examples
-#' \dontrun{
-#' # Example 1: Using SingleCellExperiment with PhiSpace scores
-#' result <- clusterPhiSpace(
-#'   x = lung_data,
-#'   k = 9,
-#'   ncomp = 30,
-#'   seed = 123
-#' )
-#'
-#' # Example 2: Using matrix directly
-#' phi_matrix <- reducedDim(lung_data, "PhiSpace")
-#' result <- clusterPhiSpace(
-#'   x = phi_matrix,
-#'   k = 9,
-#'   ncomp = 30
-#' )
-#'
-#' # Example 3: Cluster on normalized counts instead
-#' result <- clusterPhiSpace(
-#'   x = lung_data,
-#'   use_assay = "logcounts",
-#'   k = 9,
-#'   ncomp = 50
-#' )
-#'
-#' # Example 4: Using data frame
-#' df <- as.data.frame(reducedDim(lung_data, "PhiSpace"))
-#' result <- clusterPhiSpace(x = df, k = 9)
-#'
-#' # Example 5: Automatic k selection
-#' result <- clusterPhiSpace(
-#'   x = phi_matrix,
-#'   k_range = c(5, 15),
-#'   select_k_method = "silhouette"
-#' )
-#' }
+#' set.seed(1)
+#' scores <- matrix(rnorm(150 * 5), 150, 5, dimnames = list(NULL, LETTERS[1:5]))
+#' scores[1:50, 1] <- scores[1:50, 1] + 3
+#' scores[51:100, 2] <- scores[51:100, 2] + 3
+#' res <- clusterPhiSpace(scores, k = 3, seed = 1)
+#' res
+#' table(res$clusters)
+#' # Choose k from a range with the silhouette method.
+#' res <- clusterPhiSpace(scores, k_range = 2:5, seed = 1)
+#' summary(res)
+#' plot(res, type = "silhouette")
 #'
 #' @importFrom stats kmeans
 #' @export

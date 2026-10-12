@@ -13,6 +13,10 @@
 #'
 #' @return An updated `SingleCellExpeirment` object with a pseudobulk assay.
 #'
+#' @examples
+#' sce <- scuttle::mockSCE(ncells = 200, ngenes = 50)
+#' pb <- pseudoBulk(sce, phenotypes = "Cell_Cycle", resampSizes = 10, nPool = 5)
+#' dim(pb$reference)
 #' @export
 pseudoBulk <- function(
     sce,

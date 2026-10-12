@@ -15,3 +15,9 @@ A double-centred matrix.
 \description{
 Double center a matrix by column and row means, resulting in a new matrix with zero row and column means.
 }
+\examples{
+X <- matrix(1:12, 3, 4)
+dc <- doubleCent(X)
+round(rowMeans(dc), 10)
+round(colMeans(dc), 10)
+}

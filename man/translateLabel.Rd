@@ -21,3 +21,10 @@ A vector containing translated labels.
 \description{
 Translate cell type labels from finer to coarser according to a dictionary.
 }
+\examples{
+dictionary <- data.frame(
+  label.fine = c("CD4 T", "CD8 T", "Naive B"),
+  label.main = c("T cell", "T cell", "B cell")
+)
+translateLabel(c("CD8 T", "Naive B", "CD4 T"), dictionary)
+}

@@ -7,6 +7,11 @@
 #'
 #' @return A matrix normalised by row or by column.
 #'
+#' @examples
+#' set.seed(1)
+#' scores <- matrix(rnorm(20), 5, 4, dimnames = list(NULL, LETTERS[1:4]))
+#' normPhiScores(scores)
+#' normPhiScores(scores, method = "row")
 #' @export
 normPhiScores <- function(X, method = c("col", "row")){
   method <- match.arg(method)

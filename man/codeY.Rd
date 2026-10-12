@@ -19,3 +19,8 @@ codeY(sce, phenotypes, method = c("-1,1", "0,1"))
 \description{
 Convert discrete annotations to dummy variable matrices.
 }
+\examples{
+sce <- scuttle::mockSCE(ncells = 20, ngenes = 10)
+YY <- codeY(sce, phenotypes = c("Cell_Cycle", "Treatment"))
+head(YY)
+}

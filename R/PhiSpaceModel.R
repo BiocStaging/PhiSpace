@@ -115,6 +115,17 @@
 #'
 #' @seealso [predict.PhiSpaceModel()], [PhiSpace()], [PhiSpaceR_1ref()].
 #'
+#' @examples
+#' set.seed(1)
+#' ref <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 200, ngenes = 300))
+#' query <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 100, ngenes = 300))
+#' model <- trainPhiSpace(ref, phenotypes = "Cell_Cycle", refAssay = "logcounts",
+#'                        ncomp = 3, referenceName = "mock reference")
+#' model
+#' scores <- predict(model, query)
+#' head(scores)
+#' # A model can replace the reference in PhiSpace().
+#' query <- PhiSpace(model, query)
 #' @export
 trainPhiSpace <- function(
     reference,
@@ -227,6 +238,15 @@ trainPhiSpace <- function(
 #' @return A cell by phenotype matrix of raw PhiSpace scores. Use
 #'   [normPhiScores()] to normalise them.
 #'
+#' @examples
+#' set.seed(1)
+#' ref <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 200, ngenes = 300))
+#' query <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 100, ngenes = 300))
+#' model <- trainPhiSpace(ref, phenotypes = "Cell_Cycle", refAssay = "logcounts",
+#'                        ncomp = 3)
+#' raw <- predict(model, query)
+#' # Normalised scores, as PhiSpace() stores them.
+#' head(normPhiScores(raw))
 #' @export
 predict.PhiSpaceModel <- function(object, newdata, assay = NULL, nfeat = NULL, ...){
 

@@ -25,6 +25,16 @@
 #' @param cellTypeThreshold Integer or NULL. If a positive integer, cell types with fewer than this many cells in the reference will be removed before tuning. Only used when `phenotypes` is provided. Default is `NULL` (no filtering).
 #'
 #' @return A list
+#' @examples
+#' # tunePhiSpace() plots the cross-validation errors and asks for a choice of
+#' # ncomp and nfeat, so it runs only in an interactive session.
+#' if (interactive()) {
+#'   set.seed(1)
+#'   ref <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 200, ngenes = 300))
+#'   tuned <- tunePhiSpace(ref, assayName = "logcounts", phenotypes = "Cell_Cycle",
+#'                         ncompGrid = 1:4, nfeatV = c(20, 50), Kfolds = 3)
+#'   tuned$ncomp
+#' }
 #' @export
 tunePhiSpace <- function(reference,
                          assayName = "logcounts",

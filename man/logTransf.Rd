@@ -32,3 +32,8 @@ A SingleCellExperiment object containing a new assay after relative counts norma
 \description{
 Do log1p normalisation by default.
 }
+\examples{
+sce <- scuttle::mockSCE(ncells = 20, ngenes = 10)
+sce <- logTransf(sce, targetAssay = "log1p")
+assay(sce, "log1p")[1:3, 1:3]
+}

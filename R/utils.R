@@ -168,6 +168,10 @@ split2 <- function(x, n){
 #' @param key String.
 #'
 #' @return Data frame.
+#' @examples
+#' mat <- matrix(1:6, 2, 3)
+#' reNameCols(mat)
+#' reNameCols(mat, key = "PC")
 #' @export
 reNameCols <- function(
   mat,
@@ -284,6 +288,11 @@ scal <- function(X, center = NULL, scale = NULL){
 #' @param X A matrix or an object convertible to one.
 #'
 #' @return A double-centred matrix.
+#' @examples
+#' X <- matrix(1:12, 3, 4)
+#' dc <- doubleCent(X)
+#' round(rowMeans(dc), 10)
+#' round(colMeans(dc), 10)
 #' @export
 doubleCent <- function(X){
 

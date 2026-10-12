@@ -8,6 +8,11 @@
 #' @param config Configuration of UMAP (see `umap` package).
 #'
 #' @return UMAP coordinates.
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(100 * 10), 100, 10, dimnames = list(paste0("cell", 1:100), NULL))
+#' emb <- computeUMAP(X, ncomp = 5)
+#' dim(emb)
 #' @export
 computeUMAP <- function(
     dat,

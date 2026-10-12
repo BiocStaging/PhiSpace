@@ -67,32 +67,13 @@
 #' class.
 #'
 #' @examples
-#' \dontrun{
-#' # Generate a signature for a one-class reference.
-#' scoreCells(reference_sce, query_sce, class_col = NULL)
-#'
-#' # Supply a one-class signature.
-#' scoreCells(
-#'   reference_sce, query_sce, class_col = NULL,
-#'   signature_genes = c("C1qa", "C1qb", "C1qc", "Csf1r")
-#' )
-#'
-#' # Supply signatures for a multi-class reference.
-#' supplied <- list(
-#'   macrophage = c("C1qa", "C1qb", "Csf1r"),
-#'   monocyte = c("Lyz2", "Ccr2", "Ly6c2")
-#' )
-#' scoreCells(
-#'   reference_sce, query_sce, class_col = "celltype",
-#'   signature_genes = supplied, scoring = "correlation"
-#' )
-#'
-#' # Compute both score types from identical supplied genes.
-#' scoreCells(
-#'   reference_sce, query_sce, class_col = "celltype",
-#'   signature_genes = supplied, scoring = "both"
-#' )
-#' }
+#' set.seed(1)
+#' ref <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 200, ngenes = 300))
+#' query <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 100, ngenes = 300))
+#' query <- scoreCells(ref, query, class_col = "Cell_Cycle",
+#'                     signature_method = "mean", n_signature_genes = 20,
+#'                     verbose = FALSE)
+#' reducedDimNames(query)
 #'
 #' @export
 scoreCells <- function(reference,

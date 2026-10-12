@@ -187,6 +187,18 @@ basicPlotFormat <- function(
 #' @param ... Other arguments to pass to `basicPlotFormat`.
 #'
 #' @return A ggplot2 object.
+#' @examples
+#' set.seed(1)
+#' ref <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 200, ngenes = 300))
+#' query <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 100, ngenes = 300))
+#' spe <- SpatialExperiment::SpatialExperiment(
+#'   assays = list(logcounts = logcounts(query)),
+#'   spatialCoords = cbind(x = runif(100), y = runif(100))
+#' )
+#' spe <- PhiSpace(ref, spe, phenotypes = "Cell_Cycle", refAssay = "logcounts",
+#'                 ncomp = 3)
+#' VizSpatial(spe, reducedDim = "G1")
+#' VizSpatial(spe, feature = "Gene_0001", assay2use = "logcounts")
 #' @export
 #'
 VizSpatial <- function(

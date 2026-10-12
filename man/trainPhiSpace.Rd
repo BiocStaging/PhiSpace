@@ -158,6 +158,18 @@ warning (see \code{\link[=predict.PhiSpaceModel]{predict.PhiSpaceModel()}}).
 A larger \code{nfeatPool} gives a selection closer to that of \code{\link[=PhiSpace]{PhiSpace()}},
 and a larger model.
 }
+\examples{
+set.seed(1)
+ref <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 200, ngenes = 300))
+query <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 100, ngenes = 300))
+model <- trainPhiSpace(ref, phenotypes = "Cell_Cycle", refAssay = "logcounts",
+                       ncomp = 3, referenceName = "mock reference")
+model
+scores <- predict(model, query)
+head(scores)
+# A model can replace the reference in PhiSpace().
+query <- PhiSpace(model, query)
+}
 \seealso{
 \code{\link[=predict.PhiSpaceModel]{predict.PhiSpaceModel()}}, \code{\link[=PhiSpace]{PhiSpace()}}, \code{\link[=PhiSpaceR_1ref]{PhiSpaceR_1ref()}}.
 }

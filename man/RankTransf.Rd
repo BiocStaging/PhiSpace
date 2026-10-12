@@ -21,3 +21,8 @@ An updated \code{SingleCellExperiment} object with a rank transformed assay.
 \description{
 Rank transform of a \code{SingleCellExperiment} object.
 }
+\examples{
+sce <- scuttle::mockSCE(ncells = 20, ngenes = 10)
+sce <- RankTransf(sce)
+assay(sce, "rank")[1:3, 1:3]
+}

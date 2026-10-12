@@ -44,27 +44,17 @@
 #' appropriate one for your analysis.
 #'
 #' @examples
-#' \dontrun{
-#' # Basic usage - find 9 niches using PCA
-#' spe <- findNiches(spe, n_niches = 9)
-#'
-#' # Test multiple numbers of niches
-#' spe <- findNiches(spe, n_niches = c(7, 8, 9, 10))
-#'
-#' # Find niches without PCA
-#' spe <- findNiches(spe, n_niches = 6, use_pca = FALSE)
-#'
-#' # Custom PCA settings
-#' spe <- findNiches(spe, n_niches = c(6, 8, 10), ncomp = 15, store_pca = TRUE)
-#'
-#' # Access niche assignments
-#' table(spe$spatial_niches)  # for single n_niches
-#' table(spe$spatial_niches_k8)  # for multiple n_niches
-#'
-#' # Visualize niches spatially
-#' VizSpatial(spe, groupBy = "spatial_niches")
-#' VizSpatial(spe, groupBy = "spatial_niches_k8")
-#' }
+#' set.seed(1)
+#' ref <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 200, ngenes = 300))
+#' query <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 100, ngenes = 300))
+#' spe <- SpatialExperiment::SpatialExperiment(
+#'   assays = list(logcounts = logcounts(query)),
+#'   spatialCoords = cbind(x = runif(100), y = runif(100))
+#' )
+#' spe <- PhiSpace(ref, spe, phenotypes = "Cell_Cycle", refAssay = "logcounts",
+#'                 ncomp = 3)
+#' spe <- findNiches(spe, n_niches = 3, ncomp = 3, verbose = FALSE)
+#' table(spe$spatial_niches)
 #'
 #' @export
 findNiches <- function(spe,

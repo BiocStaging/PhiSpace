@@ -32,3 +32,9 @@ UMAP coordinates.
 \description{
 Compute UMAP.
 }
+\examples{
+set.seed(1)
+X <- matrix(rnorm(100 * 10), 100, 10, dimnames = list(paste0("cell", 1:100), NULL))
+emb <- computeUMAP(X, ncomp = 5)
+dim(emb)
+}

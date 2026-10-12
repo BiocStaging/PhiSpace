@@ -23,3 +23,11 @@ A downsized SCE object
 \description{
 Subsample from a sce object
 }
+\examples{
+sce <- scuttle::mockSCE(ncells = 200, ngenes = 10)
+small <- subsample(sce, proportion = 0.2)
+ncol(small)
+# Stratified by a colData column, keeping at least 20 cells per class.
+strat <- subsample(sce, key = "Cell_Cycle", proportion = 0.1, minCellNum = 20)
+table(strat$Cell_Cycle)
+}

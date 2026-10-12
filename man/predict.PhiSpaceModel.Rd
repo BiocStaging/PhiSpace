@@ -73,3 +73,13 @@ alike, such as the base of the logarithm, do not change the normalised
 scores, because the query is centred and each score is scaled by
 \code{\link[=normPhiScores]{normPhiScores()}}.
 }
+\examples{
+set.seed(1)
+ref <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 200, ngenes = 300))
+query <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 100, ngenes = 300))
+model <- trainPhiSpace(ref, phenotypes = "Cell_Cycle", refAssay = "logcounts",
+                       ncomp = 3)
+raw <- predict(model, query)
+# Normalised scores, as PhiSpace() stores them.
+head(normPhiScores(raw))
+}

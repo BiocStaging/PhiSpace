@@ -56,3 +56,10 @@ A sparse \code{X} (for example a \code{dgCMatrix}) stays sparse: centring and
 scaling are applied implicitly, without a dense copy of \code{X}. PLS uses the
 kernel algorithm of \code{pls::kernelpls.fit}.
 }
+\examples{
+set.seed(1)
+X <- matrix(rnorm(100 * 20), 100, 20)
+Y <- X[, 1:3] \%*\% matrix(rnorm(9), 3, 3) + matrix(rnorm(300, sd = 0.1), 100, 3)
+fit <- mvr(X, Y, ncomp = 3, method = "PLS")
+dim(fit$coefficients)
+}

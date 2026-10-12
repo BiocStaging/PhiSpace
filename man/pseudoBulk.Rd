@@ -44,3 +44,8 @@ An updated \code{SingleCellExpeirment} object with a pseudobulk assay.
 \description{
 Converting single cells to pseudo-bulks.
 }
+\examples{
+sce <- scuttle::mockSCE(ncells = 200, ngenes = 50)
+pb <- pseudoBulk(sce, phenotypes = "Cell_Cycle", resampSizes = 10, nPool = 5)
+dim(pb$reference)
+}

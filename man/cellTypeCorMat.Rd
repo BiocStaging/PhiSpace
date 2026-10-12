@@ -41,3 +41,11 @@ This method first converts the \code{data.frame} to a \code{matrix} and then cal
 This method uses the reduced dimension \code{"PhiSpace"} of the \code{SingleCellExperiment} object to compute the correlation matrix.
 If \code{"PhiSpace"} is not available, an error is raised.
 }
+\examples{
+set.seed(1)
+scores <- matrix(rnorm(200), 50, 4, dimnames = list(NULL, LETTERS[1:4]))
+cellTypeCorMat(scores)
+# One correlation matrix per group of rows.
+mask <- cbind(first = rep(c(1, 0), each = 25), second = rep(c(0, 1), each = 25))
+names(cellTypeCorMat(scores, mask = mask))
+}

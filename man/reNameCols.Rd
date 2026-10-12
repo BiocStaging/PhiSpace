@@ -17,3 +17,8 @@ Data frame.
 \description{
 Turn a matrix to a data.frame withe newly defined colnames.
 }
+\examples{
+mat <- matrix(1:6, 2, 3)
+reNameCols(mat)
+reNameCols(mat, key = "PC")
+}

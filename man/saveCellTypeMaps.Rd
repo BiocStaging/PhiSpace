@@ -125,33 +125,18 @@ When saving plots, multiple cell types are arranged in multi-panel figures
 multiple files will be created with sequential numbering.
 }
 \examples{
-\dontrun{
-# Basic usage with default settings
-saveCellTypeMaps(sce_with_phispace)
-
-# Customize visualization parameters
-saveCellTypeMaps(
-  sce = spatial_sce,
-  tissueName = "MouseBrain_Section1",
-  psize = 0.8,
-  censQuant = 0.9,
-  freeColScale = TRUE
+set.seed(1)
+ref <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 200, ngenes = 300))
+query <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 100, ngenes = 300))
+spe <- SpatialExperiment::SpatialExperiment(
+  assays = list(logcounts = logcounts(query)),
+  spatialCoords = cbind(x = runif(100), y = runif(100))
 )
-
-# Return plots for further customization
-plots <- saveCellTypeMaps(
-  sce = spatial_sce,
-  savePlots = FALSE,
-  returnPlots = TRUE
-)
-
-# Plot specific cell types only
-saveCellTypeMaps(
-  sce = spatial_sce,
-  ctypes = c("Neurons", "Astrocytes", "Microglia"),
-  fignrow = 1, figncol = 3
-)
-}
+spe <- PhiSpace(ref, spe, phenotypes = "Cell_Cycle", refAssay = "logcounts",
+                ncomp = 3)
+# Return the maps instead of writing files.
+maps <- saveCellTypeMaps(spe, savePlots = FALSE, returnPlots = TRUE)
+names(maps)
 
 }
 \seealso{

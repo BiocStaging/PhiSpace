@@ -28,6 +28,12 @@
 #' \item{ncomp}{}
 #' \item{method}{}
 #'
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(100 * 20), 100, 20)
+#' Y <- X[, 1:3] %*% matrix(rnorm(9), 3, 3) + matrix(rnorm(300, sd = 0.1), 100, 3)
+#' fit <- mvr(X, Y, ncomp = 3, method = "PLS")
+#' dim(fit$coefficients)
 #' @export
 mvr <- function(
     X,

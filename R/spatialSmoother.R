@@ -16,6 +16,18 @@
 #'   progress bar (default: TRUE).
 #'
 #' @return Modified object with new smoothed assay or reduced dimension
+#' @examples
+#' set.seed(1)
+#' ref <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 200, ngenes = 300))
+#' query <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 100, ngenes = 300))
+#' spe <- SpatialExperiment::SpatialExperiment(
+#'   assays = list(logcounts = logcounts(query)),
+#'   spatialCoords = cbind(x = runif(100), y = runif(100))
+#' )
+#' spe <- PhiSpace(ref, spe, phenotypes = "Cell_Cycle", refAssay = "logcounts",
+#'                 ncomp = 3)
+#' spe <- spatialSmoother(spe, k = 5, verbose = FALSE)
+#' reducedDimNames(spe)
 #' @export
 spatialSmoother <- function(object,
                             reducedDim2smooth = "PhiSpace",

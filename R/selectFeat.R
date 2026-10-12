@@ -5,6 +5,11 @@
 #' @param absVal Take absolute value or not.
 #'
 #' @return Vector of selected features.
+#' @examples
+#' set.seed(1)
+#' imp <- matrix(rnorm(40), 10, 4,
+#'               dimnames = list(paste0("gene", 1:10), LETTERS[1:4]))
+#' selectFeat(imp, nfeat = 2)$selectedFeat
 #' @export
 selectFeat <- function(
     impScores,

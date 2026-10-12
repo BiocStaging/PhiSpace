@@ -11,6 +11,10 @@
 #'
 #' @return A SingleCellExperiment object containing a new assay after relative counts normalisation.
 #'
+#' @examples
+#' sce <- scuttle::mockSCE(ncells = 20, ngenes = 10)
+#' sce <- logTransf(sce, targetAssay = "log1p")
+#' assay(sce, "log1p")[1:3, 1:3]
 #' @export
 logTransf <- function(
     sce,

@@ -6,6 +6,10 @@
 #' @param offset Offset value added to raw counts
 #'
 #' @return SCE object
+#' @examples
+#' sce <- scuttle::mockSCE(ncells = 20, ngenes = 10)
+#' sce <- CLRnorm(sce)
+#' assay(sce, "data")[1:3, 1:3]
 #' @export
 CLRnorm <- function(sce, assayName = "counts", targetAssay = "data", offset = 1){
 

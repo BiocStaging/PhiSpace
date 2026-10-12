@@ -131,6 +131,15 @@ genes) for a better prediction. This means that we might have included genes wit
 scaling would greatly inflate the expression levels of these genes.
 }
 }
+\examples{
+set.seed(1)
+ref <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 200, ngenes = 300))
+query <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 100, ngenes = 300))
+res <- PhiSpaceR_1ref(ref, query, phenotypes = "Cell_Cycle",
+                      refAssay = "logcounts", ncomp = 3)
+names(res)
+head(res$PhiSpaceNorm)
+}
 \references{
 Mao J., Deng Y. and Lê Cao K.-A. (2025). Φ-Space: continuous phenotyping of
 single-cell multi-omics data. \emph{Genome Biology} 26, 323.

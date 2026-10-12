@@ -5,6 +5,11 @@
 #' @param clusts Cluster labels (optional).
 #'
 #' @return SCE object.
+#' @examples
+#' sce <- scuttle::mockSCE(ncells = 200, ngenes = 200)
+#' # Pool cells within known groups to compute the size factors.
+#' sce <- scranTransf(sce, clusts = sce$Cell_Cycle)
+#' assayNames(sce)
 #' @export
 scranTransf <- function(
     sce,

@@ -34,3 +34,10 @@ A list containing
 smaller dimension of \code{X}, where irlba can be inaccurate, it uses a full SVD
 of a dense copy of \code{X} instead.
 }
+\examples{
+set.seed(1)
+X <- matrix(rnorm(100 * 10), 100, 10)
+pc <- getPC(X, ncomp = 3)
+dim(pc$scores)
+pc$props
+}

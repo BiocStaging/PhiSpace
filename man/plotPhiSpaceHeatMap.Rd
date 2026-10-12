@@ -50,3 +50,13 @@ A heatmap of PhiSpace scores.
 \description{
 Plot PhiSpace scores as a heatmap
 }
+\examples{
+set.seed(1)
+scores <- matrix(rnorm(60 * 5), 60, 5,
+                 dimnames = list(NULL, c("T", "B", "NK", "ctrl", "stim")))
+plotPhiSpaceHeatMap(
+  scores,
+  phenoDict = list(cellType = c("T", "B", "NK"), treatment = c("ctrl", "stim")),
+  queryLabs = rep(c("cluster1", "cluster2"), each = 30)
+)
+}

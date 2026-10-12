@@ -19,3 +19,7 @@ codeY_vec(vec, rowNames = NULL, method = c("-1,1", "0,1"))
 \description{
 Convert discrete annotations to dummy variable matrices.
 }
+\examples{
+codeY_vec(c("B", "T", "T", "NK"), rowNames = paste0("cell", 1:4))
+codeY_vec(c("B", "T", "T", "NK"), method = "0,1")
+}

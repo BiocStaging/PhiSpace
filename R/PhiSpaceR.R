@@ -65,6 +65,14 @@
 #'   \emph{Cell Reports Methods} 6(8), 101483.
 #'   \doi{10.1016/j.crmeth.2026.101483}
 #'
+#' @examples
+#' # Simulated reference and query; Cell_Cycle is the reference phenotype.
+#' set.seed(1)
+#' ref <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 200, ngenes = 300))
+#' query <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 100, ngenes = 300))
+#' query <- PhiSpace(ref, query, phenotypes = "Cell_Cycle",
+#'                   refAssay = "logcounts", ncomp = 3)
+#' head(reducedDim(query, "PhiSpace"))
 #' @export
 PhiSpace <- function(
     reference,

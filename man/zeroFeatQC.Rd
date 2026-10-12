@@ -20,3 +20,9 @@ An updated SingleCellExperiment object after minimal QC.
 \description{
 Minimal quality control (QC): remove features with all zero values.
 }
+\examples{
+sce <- scuttle::mockSCE(ncells = 20, ngenes = 10)
+counts(sce)[1:2, ] <- 0
+sce <- zeroFeatQC(sce)
+dim(sce)
+}

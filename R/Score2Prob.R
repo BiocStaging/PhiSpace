@@ -27,6 +27,10 @@
 #' could be implemented to assign uniform probabilities.
 #'
 #'
+#' @examples
+#' set.seed(1)
+#' scores <- matrix(runif(20, -1, 1), 5, 4, dimnames = list(NULL, LETTERS[1:4]))
+#' round(Score2Prob(scores), 2)
 #' @export
 #'
 Score2Prob <- function(PhiSc) {

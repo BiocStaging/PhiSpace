@@ -7,6 +7,10 @@
 #'
 #' @return An updated `SingleCellExperiment` object with a rank transformed assay.
 #'
+#' @examples
+#' sce <- scuttle::mockSCE(ncells = 20, ngenes = 10)
+#' sce <- RankTransf(sce)
+#' assay(sce, "rank")[1:3, 1:3]
 #' @export
 RankTransf <- function(sce, assayname = 'counts', targetAssay = 'rank', sparse = TRUE){
 

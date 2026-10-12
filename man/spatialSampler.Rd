@@ -38,3 +38,13 @@ Subsampled SpatialExperiment object
 \description{
 Spatially-aware subsampling of SpatialExperiment objects
 }
+\examples{
+set.seed(1)
+sce <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 300, ngenes = 50))
+spe <- SpatialExperiment::SpatialExperiment(
+  assays = list(logcounts = logcounts(sce)),
+  spatialCoords = cbind(x = runif(300), y = runif(300))
+)
+sub <- spatialSampler(spe, prop = 0.2, method = "grid")
+ncol(sub)
+}

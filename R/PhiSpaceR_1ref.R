@@ -95,6 +95,14 @@
 #' @seealso [PhiSpace()] for the main user-facing wrapper that handles multiple references,
 #'   [normPhiScores()] for score normalisation, [tunePhiSpace()] for parameter tuning.
 #'
+#' @examples
+#' set.seed(1)
+#' ref <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 200, ngenes = 300))
+#' query <- scuttle::logNormCounts(scuttle::mockSCE(ncells = 100, ngenes = 300))
+#' res <- PhiSpaceR_1ref(ref, query, phenotypes = "Cell_Cycle",
+#'                       refAssay = "logcounts", ncomp = 3)
+#' names(res)
+#' head(res$PhiSpaceNorm)
 #' @export
 PhiSpaceR_1ref <- function(
     reference,

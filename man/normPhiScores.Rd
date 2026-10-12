@@ -17,3 +17,9 @@ A matrix normalised by row or by column.
 \description{
 The by-row normalisation is the same as \code{SingleR:::.trim_byLabel_and_normalize_scores}.
 }
+\examples{
+set.seed(1)
+scores <- matrix(rnorm(20), 5, 4, dimnames = list(NULL, LETTERS[1:4]))
+normPhiScores(scores)
+normPhiScores(scores, method = "row")
+}

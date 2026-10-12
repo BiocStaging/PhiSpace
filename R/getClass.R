@@ -5,6 +5,11 @@
 #'
 #' @return A vector contaning labels.
 #'
+#' @examples
+#' set.seed(1)
+#' scores <- matrix(rnorm(20), 5, 4, dimnames = list(NULL, LETTERS[1:4]))
+#' getClass(scores)
+#' getClass(scores, labPerSample = 2)
 #' @export
 getClass <- function(X, labPerSample = NULL){
 

@@ -63,26 +63,13 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
-#' # With matrix input - PLSDA
-#' expr_mat <- t(assay(spe, "logcounts"))
-#' result <- rankFeatures(expr_mat, response = spe$cluster, method = "PLSDA")
-#' head(result$feature_ranking, 10)
-#'
-#' # With experiment object - from assay
-#' result <- rankFeatures(spe, response = "cluster", method = "PLSDA",
-#'                        source = "assay", assay_name = "logcounts")
-#'
-#' # From reduced dimensions (e.g., PhiSpace scores)
-#' result <- rankFeatures(spe, response = "cluster", method = "PLSDA",
-#'                        source = "reducedDim", reducedDim_name = "PhiSpace")
-#'
-#' # PLS for continuous response
-#' result <- rankFeatures(expr_mat, response = spe$spatial_score, method = "PLS")
-#'
-#' # DWD for binary classification
-#' result <- rankFeatures(expr_mat, response = spe$treatment, method = "DWD")
-#' }
+#' set.seed(1)
+#' X <- matrix(rnorm(100 * 20), 100, 20,
+#'             dimnames = list(NULL, paste0("gene", 1:20)))
+#' group <- rep(c("a", "b"), each = 50)
+#' X[group == "b", 1:3] <- X[group == "b", 1:3] + 2
+#' res <- rankFeatures(X, response = group, method = "PLSDA")
+#' head(res$feature_ranking)
 #'
 #' @importFrom SummarizedExperiment colData assay assayNames
 #' @importFrom SingleCellExperiment reducedDim reducedDimNames

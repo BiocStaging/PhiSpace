@@ -21,6 +21,12 @@
 #' \item{Xmeans}{Column means used for centring, or `NULL`.}
 #' \item{Xscals}{Column standard deviations used for scaling, or `NULL`.}
 #'
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(100 * 10), 100, 10)
+#' pc <- getPC(X, ncomp = 3)
+#' dim(pc$scores)
+#' pc$props
 #' @export
 getPC <- function(X, ncomp, center = TRUE, scale = FALSE, sparse = FALSE){
 

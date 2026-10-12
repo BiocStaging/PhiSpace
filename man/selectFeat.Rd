@@ -19,3 +19,9 @@ Vector of selected features.
 \description{
 Select nfeat top features from each column (label) of impScores
 }
+\examples{
+set.seed(1)
+imp <- matrix(rnorm(40), 10, 4,
+              dimnames = list(paste0("gene", 1:10), LETTERS[1:4]))
+selectFeat(imp, nfeat = 2)$selectedFeat
+}

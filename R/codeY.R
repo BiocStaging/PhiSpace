@@ -7,6 +7,10 @@
 #' @return
 #' \item{YY}{A dummy variable matrix encoding discrete annotation}
 #'
+#' @examples
+#' sce <- scuttle::mockSCE(ncells = 20, ngenes = 10)
+#' YY <- codeY(sce, phenotypes = c("Cell_Cycle", "Treatment"))
+#' head(YY)
 #' @export
 codeY <- function(sce, phenotypes, method = c("-1,1", "0,1")){
 
@@ -43,6 +47,9 @@ codeY <- function(sce, phenotypes, method = c("-1,1", "0,1")){
 #' @return
 #' \item{YY}{A dummy variable matrix encoding discrete annotation}
 #'
+#' @examples
+#' codeY_vec(c("B", "T", "T", "NK"), rowNames = paste0("cell", 1:4))
+#' codeY_vec(c("B", "T", "T", "NK"), method = "0,1")
 #' @export
 codeY_vec <- function(vec, rowNames = NULL, method = c("-1,1", "0,1")){
 

@@ -46,6 +46,11 @@ Combines log fold change and p-value into a single significance score
 \code{log2FC * -log10(p)} for directional ranking; set \code{signed = FALSE}
 for the paper's original \code{|log2FC| * -log10(p)}.
 }
+\examples{
+de <- data.frame(gene = c("g1", "g2", "g3"), avg_log2FC = c(2, -1, 0.5),
+                 p_val_adj = c(1e-10, 0.01, 0.5))
+piScore(de, rank = TRUE)
+}
 \references{
 Xiao Y, Hsiao T-H, Suresh U, et al. (2014) A novel significance score for
 gene selection and ranking. \emph{Bioinformatics} 30(6):801-807.

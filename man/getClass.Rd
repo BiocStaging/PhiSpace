@@ -17,3 +17,9 @@ A vector contaning labels.
 \description{
 Dicretise soft annotation to labels.
 }
+\examples{
+set.seed(1)
+scores <- matrix(rnorm(20), 5, 4, dimnames = list(NULL, LETTERS[1:4]))
+getClass(scores)
+getClass(scores, labPerSample = 2)
+}

@@ -11,6 +11,13 @@
 #' @return If `mask` is provided, returns a list of correlation matrices (one per column of `mask`).
 #' Otherwise, returns a single correlation matrix.
 #'
+#' @examples
+#' set.seed(1)
+#' scores <- matrix(rnorm(200), 50, 4, dimnames = list(NULL, LETTERS[1:4]))
+#' cellTypeCorMat(scores)
+#' # One correlation matrix per group of rows.
+#' mask <- cbind(first = rep(c(1, 0), each = 25), second = rep(c(0, 1), each = 25))
+#' names(cellTypeCorMat(scores, mask = mask))
 #' @export
 setGeneric(
   "cellTypeCorMat",
