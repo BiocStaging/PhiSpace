@@ -39,7 +39,7 @@ plotPhiSpaceHeatMap <- function(PhiSpaceScore,
 
     phenoDict <- data.frame(
       labs = unlist(phenoDict),
-      phenotypeCategory = rep(names(phenoDict), sapply(phenoDict, length) )
+      phenotypeCategory = rep(names(phenoDict), lengths(phenoDict) )
     )
 
   } else {

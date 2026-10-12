@@ -18,13 +18,13 @@ getClass <- function(X, labPerSample = NULL){
 
   } else {
 
-    out <- sapply(1:nrow(X),
+    out <- vapply(1:nrow(X),
                   function(x){
                     vec <- X[x,,drop=FALSE]
                     ct_sort <- colnames(vec)[order(-vec)]
                     ct_sort[1:labPerSample]
                     # colnames(X)[rank(-vec, ties.method = "last") <= labPerSample]
-                  })
+                  }, character(labPerSample))
     out <- t(out)
 
   }

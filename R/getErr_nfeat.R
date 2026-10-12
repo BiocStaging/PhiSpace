@@ -34,7 +34,7 @@ getErr_nfeat <- function(
   YYtest <- as.matrix(YYtest)
 
   out <-
-    sapply(nfeatV,
+    vapply(nfeatV,
            function(nfeat){
 
              selectedFeat <- selectFeat(impScores, nfeat)$selectedFeat
@@ -91,7 +91,8 @@ getErr_nfeat <- function(
 
 
              return(Ers)
-           }
+           },
+    numeric(1)
     )
 
 

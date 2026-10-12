@@ -60,7 +60,7 @@ getErr <- function(
 
 
   out <-
-    sapply(ncompV,
+    vapply(ncompV,
            function(ncomp){
 
              Bhat <- BhatAll[,,ncomp]
@@ -97,7 +97,8 @@ getErr <- function(
 
 
              return(Ers)
-           }
+           },
+    numeric(1)
     )
 
 

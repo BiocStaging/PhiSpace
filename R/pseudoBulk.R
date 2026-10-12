@@ -51,7 +51,7 @@ pseudoBulk <- function(
   idxList <- split(1:nCells, cluster)
   names(idxList) <- cluname
   Ncluster <- length(cluname)
-  clustSizes <- sapply(idxList, length)
+  clustSizes <- lengths(idxList)
   # How many to resample
   if(is.null(proportion)){
 

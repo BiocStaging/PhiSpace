@@ -371,11 +371,11 @@ clusterPhiSpace <- function(
 
   } else {  # elbow method
 
-    wss <- sapply(k_values, function(k) {
+    wss <- vapply(k_values, function(k) {
       km <- kmeans(pc_scores, centers = k, nstart = nstart,
                    iter.max = iter.max, algorithm = algorithm)
       km$tot.withinss
-    })
+    }, numeric(1))
 
     # Find elbow using second derivative
     if (length(k_values) >= 3) {

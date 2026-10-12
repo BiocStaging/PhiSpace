@@ -93,13 +93,13 @@ classErr <- function(classQuery, classOriginal, labPerSample = NULL){
 
     # Balanced error
     classL <- unique(classOriginal)
-    errs <- sapply(1:length(classL),
+    errs <- vapply(1:length(classL),
                    function(x){
                      cl <- classL[x]
                      idx <- (classOriginal == cl)
                      # Per class classification error
                      sum(classQuery[idx] != classOriginal[idx])/sum(idx)
-                   })
+                   }, numeric(1))
     names(errs) <- classL
     out_errs[2] <- mean(errs)
 
@@ -111,10 +111,10 @@ classErr <- function(classQuery, classOriginal, labPerSample = NULL){
 
     # Overall errors
     ove_errs <-
-      sapply(1:nrow(classQuery),
+      vapply(1:nrow(classQuery),
              function(x){
                out <- sum(2 - sum(classQuery[x,] %in% classOriginal[x,]))/labPerSample
-             })
+             }, numeric(1))
     ove_errs <- sum(ove_errs)/length(ove_errs)
 
     # Balanced error
@@ -122,12 +122,12 @@ classErr <- function(classQuery, classOriginal, labPerSample = NULL){
     for(erIdx in 1:ncol(classOriginal)){
 
       classL <- unique(classOriginal[,erIdx])
-      errs <- sapply(1:length(classL),
+      errs <- vapply(1:length(classL),
                      function(x){
                        cl <- classL[x]
                        idx <- (classOriginal[,erIdx] == cl)
                        sum(classQuery[idx, erIdx] != classOriginal[idx, erIdx])/sum(idx)
-                     })
+                     }, numeric(1))
       names(errs) <- classL
       out_list[[erIdx]] <- errs
 

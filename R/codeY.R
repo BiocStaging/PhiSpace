@@ -17,13 +17,13 @@ codeY <- function(sce, phenotypes, method = c("-1,1", "0,1")){
   for(phIdx in 1:length(phenotypes)){
     ph <- phenotypes[phIdx]
     labs <- unique(as.character(colData(sce)[,ph]))
-    YY_temp <- sapply(1:length(labs),
+    YY_temp <- vapply(1:length(labs),
                       function(x){
                         lab <- labs[x]
                         out <- as.numeric(colData(sce)[,ph] == lab)
                         if(method == "-1,1") out[out == 0] <- -1
                         out
-                      })
+                      }, numeric(ncol(sce)))
     colnames(YY_temp) <- labs
     YY[[phIdx]] <- YY_temp
   }
@@ -51,15 +51,16 @@ codeY_vec <- function(vec, rowNames = NULL, method = c("-1,1", "0,1")){
   method <- match.arg(method)
 
   labs <- levels(vec)
-  YY <- sapply(
+  YY <- vapply(
     1:length(labs),
     function(x){
       lab <- labs[x]
       out <- as.numeric(vec == lab)
       if(method == "-1,1") out[out == 0] <- -1
       out
-    }
-  )
+    },
+  numeric(length(vec)
+  ))
   colnames(YY) <- labs
 
   if(!is.null(rowNames)) rownames(YY) <- rowNames
