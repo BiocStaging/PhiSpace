@@ -70,15 +70,16 @@ RTassay <- function(X){
   return(Matrix::t(RTassay(Matrix::t(X))))
 }
 
-#' Calcualte classification errors.
+#' Calculate classification errors.
 #'
 #' @param classQuery Character vector.
 #' @param classOriginal Character vector.
 #' @param labPerSample Integer.
 #'
 #' @return A list containing:
-#' \item{err}{}
-#' \item{byClassErrs}{}
+#' \item{err}{Numeric vector: the overall error rate and the balanced error
+#'   rate (the mean of the per-class error rates).}
+#' \item{byClassErrs}{Named numeric vector of per-class error rates.}
 #'
 classErr <- function(classQuery, classOriginal, labPerSample = NULL){
 
