@@ -630,8 +630,8 @@ print.PhiSpaceModel <- function(x, ...){
             " candidate genes per phenotype of the model (nfeatPool); genes ",
             "are selected among the candidate genes only.", call. = FALSE)
   }
-  message(if(nMissing > 0) paste0(lacks, "; s") else "S",
-          "electing ", nfeat, " genes per phenotype among the ", length(avail),
+  lead <- if(nMissing > 0) paste0(lacks, "; s") else "S"
+  message(lead, "electing ", nfeat, " genes per phenotype among the ", length(avail),
           " of the ", length(pool), " candidate genes that the query has, ",
           "and refitting the model.")
 

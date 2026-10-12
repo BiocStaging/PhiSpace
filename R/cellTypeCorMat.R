@@ -51,8 +51,8 @@ setMethod(
         seq_len(ncol(mask)),
         function(i){
           subset_rows <- (mask[, i] == 1)
-          if(sum(subset_rows) == 0) stop(paste0("The ", i,"th column of mask doesn't contain any 1s."))
-          if(sum(subset_rows) < 10) warning(paste0("The ", i,"th column of mask contains fewer than 10 1s."))
+          if(sum(subset_rows) == 0) stop("The ", i, "th column of mask doesn't contain any 1s.")
+          if(sum(subset_rows) < 10) warning("The ", i, "th column of mask contains fewer than 10 1s.")
           stats::cor(input[subset_rows, , drop = FALSE], use = "pairwise.complete.obs")
         })
       return(result)
@@ -98,7 +98,7 @@ setMethod(
            groupBy = NULL) {
 
     if (!reducedDimName %in% reducedDimNames(input)) {
-      stop(paste(reducedDimName, "is not a valid reduced dimension in the SCE object."))
+      stop(reducedDimName, " is not a valid reduced dimension in the SCE object.")
     }
 
     if(!is.null(groupBy)){

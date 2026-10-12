@@ -60,10 +60,10 @@ spatialSmoother <- function(object,
     }
 
     if (!x_coord %in% colnames(colData(object))) {
-      stop(paste("Column", x_coord, "not found in colData"))
+      stop("Column ", x_coord, " not found in colData")
     }
     if (!y_coord %in% colnames(colData(object))) {
-      stop(paste("Column", y_coord, "not found in colData"))
+      stop("Column ", y_coord, " not found in colData")
     }
 
     coordinates <- data.frame(
@@ -89,7 +89,7 @@ spatialSmoother <- function(object,
     if(verbose) message("Smoothing reduced dimensions: ", reducedDim2smooth)
 
     if (!reducedDim2smooth %in% reducedDimNames(object)) {
-      stop(paste("Reduced dimension", reducedDim2smooth, "not found in object"))
+      stop("Reduced dimension ", reducedDim2smooth, " not found in object")
     }
 
     # Get reduced dimension matrix (cells x dimensions)
@@ -127,7 +127,7 @@ spatialSmoother <- function(object,
     if(verbose) message("Smoothing gene expression from assay: ", assay2smooth)
 
     if (!assay2smooth %in% assayNames(object)) {
-      stop(paste("Assay", assay2smooth, "not found in object"))
+      stop("Assay ", assay2smooth, " not found in object")
     }
 
     # Get expression matrix

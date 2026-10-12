@@ -88,7 +88,7 @@ findNiches <- function(spe,
   }
 
   if (!reducedDimName %in% reducedDimNames(spe)) {
-    stop(paste("reducedDim", reducedDimName, "not found in object"))
+    stop("reducedDim ", reducedDimName, " not found in object")
   }
 
   if (missing(n_niches) || !is.numeric(n_niches) || any(n_niches < 1)) {
@@ -222,10 +222,10 @@ findNiches <- function(spe,
   )
 
   if (use_pca) {
-    metadata_entry$ncomp = ncomp
-    metadata_entry$center = center
-    metadata_entry$scale = scale
-    metadata_entry$variance_explained = sum(pca_result$props)
+    metadata_entry$ncomp <- ncomp
+    metadata_entry$center <- center
+    metadata_entry$scale <- scale
+    metadata_entry$variance_explained <- sum(pca_result$props)
   }
 
   S4Vectors::metadata(spe)$nicheAnalysis <- c(

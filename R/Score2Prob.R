@@ -49,8 +49,8 @@ Score2Prob <- function(PhiSc) {
   # Handle rows with all zeros (avoid division by zero)
   zero_rows <- row_sums == 0
   if (any(zero_rows)) {
-    warning(paste(sum(zero_rows), "row(s) have all zero or negative values.",
-                  "These rows will be set to zero probabilities."))
+    warning(sum(zero_rows), " row(s) have all zero or negative values. ",
+            "These rows will be set to zero probabilities.")
   }
 
   # Divide each row by its sum to create probabilities

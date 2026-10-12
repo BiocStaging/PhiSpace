@@ -232,8 +232,8 @@ VizSpatial <- function(
 
     if(ncol(spatialCoords(obj)) > 2) message("There are more than 2 spatial coordinates in obj, only using the first two as x and y coordinates.")
 
-    x_coord = coordNames[1]
-    y_coord = coordNames[2]
+    x_coord <- coordNames[1]
+    y_coord <- coordNames[2]
 
   } else {
 
