@@ -11,6 +11,9 @@
 
 \item{...}{Additional arguments (not used)}
 }
+\value{
+\code{object}, invisibly. Called for the printed summary.
+}
 \description{
 Summary method for PhiSpaceClustering objects
 }

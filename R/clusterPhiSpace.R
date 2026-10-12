@@ -465,6 +465,7 @@ clusterPhiSpace <- function(
 #' Print method for PhiSpaceClustering objects
 #' @param x A PhiSpaceClustering object
 #' @param ... Additional arguments (not used)
+#' @return `x`, invisibly. Called for the printed summary.
 #' @method print PhiSpaceClustering
 #' @export
 print.PhiSpaceClustering <- function(x, ...) {
@@ -505,12 +506,14 @@ print.PhiSpaceClustering <- function(x, ...) {
 
   cat("\nUse plot() to visualize results\n")
   cat("Use summary() for more details\n")
+  invisible(x)
 }
 
 
 #' Summary method for PhiSpaceClustering objects
 #' @param object A PhiSpaceClustering object
 #' @param ... Additional arguments (not used)
+#' @return `object`, invisibly. Called for the printed summary.
 #' @method summary PhiSpaceClustering
 #' @export
 summary.PhiSpaceClustering <- function(object, ...) {
@@ -567,6 +570,7 @@ summary.PhiSpaceClustering <- function(object, ...) {
 #'   "elbow" (elbow plot if k_range was used), "silhouette" (silhouette plot if
 #'   k_range was used), "variance" (PCA variance explained). Default is "pca".
 #' @param ... Additional arguments passed to plotting functions
+#' @return A ggplot object.
 #' @method plot PhiSpaceClustering
 #' @export
 plot.PhiSpaceClustering <- function(x, type = c("pca", "elbow", "silhouette", "variance"), ...) {

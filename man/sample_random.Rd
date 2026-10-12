@@ -11,6 +11,10 @@ sample_random(coordinates, n_target)
 
 \item{n_target}{Number of targets}
 }
+\value{
+Character vector of the selected cell IDs.
+}
 \description{
 Random sampling (baseline method)
 }
+\keyword{internal}

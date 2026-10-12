@@ -26,6 +26,10 @@ sample_grid(
 
 \item{verbose}{Whether to report progress with \code{\link[=message]{message()}}}
 }
+\value{
+Character vector of the selected cell IDs.
+}
 \description{
 Grid-based spatial sampling
 }
+\keyword{internal}

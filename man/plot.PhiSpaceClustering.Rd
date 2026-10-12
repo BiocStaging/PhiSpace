@@ -15,6 +15,9 @@ k_range was used), "variance" (PCA variance explained). Default is "pca".}
 
 \item{...}{Additional arguments passed to plotting functions}
 }
+\value{
+A ggplot object.
+}
 \description{
 Plot method for PhiSpaceClustering objects
 }

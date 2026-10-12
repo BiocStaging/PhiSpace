@@ -23,6 +23,10 @@ sample_kmeans(
 
 \item{verbose}{Whether to report progress with \code{\link[=message]{message()}}}
 }
+\value{
+Character vector of the selected cell IDs.
+}
 \description{
 K-means based spatial sampling
 }
+\keyword{internal}
