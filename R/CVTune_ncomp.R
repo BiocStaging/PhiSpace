@@ -126,7 +126,7 @@ CVTune_ncomp <- function(reference,
     geom_point(mapping = aes(y = plot_dat$FrobRatio)) +
     ylab("Loss")
 
-  if(interactive()) print(p)
+  if(interactive()) plot(p)
 
   if(is.null(ncomp)){
     if(interactive()){

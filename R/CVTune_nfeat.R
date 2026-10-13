@@ -174,7 +174,7 @@ CVTune_nfeat <- function(reference,
     geom_point(mapping = aes(y = plot_dat$FrobRatio)) +
     ylab("Loss")
 
-  if(interactive()) print(p)
+  if(interactive()) plot(p)
 
   ## TODO: gap statistic for data-driven selection of nfeat
   if(is.null(nfeat)){
