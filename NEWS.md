@@ -4,6 +4,12 @@ The version number drops from 1.1.0.9000 to 0.99.0 because Bioconductor
 requires new submissions to use 0.99.z. The changes below are relative to
 PhiSpace 1.1.0, the release archived on Zenodo.
 
+## Renamed functions
+
+* `getClass()` is now `getLabels()`. The old name masked
+  `methods::getClass()` when PhiSpace was attached. Replace `getClass(` with
+  `getLabels(` in existing scripts; the arguments and results are unchanged.
+
 ## Changes that can alter results
 
 * Functions with a `seed` argument (`findNiches()`, `clusterPhiSpace()`,

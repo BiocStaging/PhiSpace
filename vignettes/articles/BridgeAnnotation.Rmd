@@ -187,9 +187,9 @@ Evaluate performances: calculating overall and balanced (per cell type average) 
 originAnn <- queryGA$cellType
 originAnn_l1 <- query_lookup$l1[match(originAnn, query_lookup$l2)]
 # Translate PhiSpace labels
-PhiSpaceAnn <- PhiScGA %>% getClass
+PhiSpaceAnn <- PhiScGA %>% getLabels
 PhiSpaceAnn_l1 <- ref_lookup$l1[match(PhiSpaceAnn, ref_lookup$l2)]
-PhiSpaceAnnPeaks <- PhiScPeaks %>% getClass()
+PhiSpaceAnnPeaks <- PhiScPeaks %>% getLabels()
 PhiSpaceANN_l1_peaks <- ref_lookup$l1[match(PhiSpaceAnnPeaks, ref_lookup$l2)]
 PhiSpace:::classErr(PhiSpaceAnn_l1, originAnn_l1)$err
 PhiSpace:::classErr(PhiSpaceANN_l1_peaks, originAnn_l1)$err

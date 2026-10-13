@@ -112,6 +112,6 @@ pseudoBulk <- function(
 
   # Output
   sce <- SingleCellExperiment(list(counts = XXagg), reducedDims = list(response = YYagg))
-  if(length(phenotypes)==1) colData(sce)[,phenotypes] <- getClass(YYagg)
+  if(length(phenotypes)==1) colData(sce)[,phenotypes] <- getLabels(YYagg)
   return(sce)
 }
