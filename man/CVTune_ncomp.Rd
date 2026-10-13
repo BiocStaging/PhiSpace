@@ -19,7 +19,8 @@ CVTune_ncomp(
   regMethod = "PCA",
   labelCode = "-1,1",
   Ncores = 1,
-  seed = 5202056
+  seed = 5202056,
+  ncomp = NULL
 )
 }
 \arguments{
@@ -52,6 +53,10 @@ CVTune_ncomp(
 \item{Ncores}{Integer.}
 
 \item{seed}{Integer. The function sets the seed with \code{\link[withr:with_seed]{withr::local_seed()}}, so the session's random-number state is restored on exit.}
+
+\item{ncomp}{Chosen number of components, or \code{NULL} to choose after the
+cross-validation: in an interactive session the function plots the loss
+and asks; otherwise it takes the grid value with the lowest loss.}
 }
 \value{
 A list.

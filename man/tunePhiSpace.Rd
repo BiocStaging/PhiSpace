@@ -2,7 +2,7 @@
 % Please edit documentation in R/tunePhiSpace.R
 \name{tunePhiSpace}
 \alias{tunePhiSpace}
-\title{Title}
+\title{Tune ncomp and nfeat by cross-validation}
 \usage{
 tunePhiSpace(
   reference,
@@ -27,7 +27,8 @@ tunePhiSpace(
   labelCode = "-1,1",
   Ncores = 1,
   seed = 5202056,
-  cellTypeThreshold = NULL
+  cellTypeThreshold = NULL,
+  nfeat = NULL
 )
 }
 \arguments{
@@ -39,7 +40,10 @@ tunePhiSpace(
 
 \item{YY}{Matrix.}
 
-\item{ncomp}{Integer.}
+\item{ncomp}{Integer. With \code{tune_ncomp = TRUE}, the value to use after the
+cross-validation instead of asking or taking the lowest loss. With
+\code{tune_ncomp = FALSE}, the value to use; \code{NULL} uses the number of
+columns of \code{YY}.}
 
 \item{impScores}{Matrix.}
 
@@ -47,9 +51,11 @@ tunePhiSpace(
 
 \item{scale}{Logical.}
 
-\item{tune_ncomp}{Logic.}
+\item{tune_ncomp}{Logical: compute the cross-validation loss for each
+value in the ncomp grid.}
 
-\item{tune_nfeat}{Logic.}
+\item{tune_nfeat}{Logical: compute the cross-validation loss for each
+value in the nfeat grid.}
 
 \item{ncompLimits}{Vector.}
 
@@ -76,21 +82,33 @@ tunePhiSpace(
 \item{seed}{Integer. The function sets the seed with \code{\link[withr:with_seed]{withr::local_seed()}}, so the session's random-number state is restored on exit.}
 
 \item{cellTypeThreshold}{Integer or NULL. If a positive integer, cell types with fewer than this many cells in the reference will be removed before tuning. Only used when \code{phenotypes} is provided. Default is \code{NULL} (no filtering).}
+
+\item{nfeat}{Integer. With \code{tune_nfeat = TRUE}, the number of features
+per phenotype to use after the cross-validation instead of asking;
+required in a non-interactive session.}
 }
 \value{
-A list
+A list with \code{ncomp}, \code{nfeat}, \code{impScores} (feature importance
+scores), \code{selectedFeat} (selected features), and \code{tuneNcompErrs} and
+\code{tuneNfeatErrs} (data frames of the cross-validation loss for each grid
+value, or \code{NULL} when that parameter was not tuned).
 }
 \description{
-Title
+Computes the K-fold cross-validation loss of a PhiSpace model over a grid
+of numbers of components (\code{ncomp}) and then over a grid of numbers of
+features per phenotype (\code{nfeat}), and returns the chosen values with the
+selected features. In an interactive session the function plots each loss
+curve and asks for a value unless \code{ncomp} or \code{nfeat} is given. In a
+non-interactive session it chooses the \code{ncomp} with the lowest loss, and
+\code{nfeat} must be given when \code{tune_nfeat = TRUE}.
 }
 \examples{
-# tunePhiSpace() plots the cross-validation errors and asks for a choice of
-# ncomp and nfeat, so it runs only in an interactive session.
-if (interactive()) {
-  set.seed(1)
-  ref <- logNormTransf(scuttle::mockSCE(ncells = 200, ngenes = 300))
-  tuned <- tunePhiSpace(ref, assayName = "logcounts", phenotypes = "Cell_Cycle",
-                        ncompGrid = 1:4, nfeatV = c(20, 50), Kfolds = 3)
-  tuned$ncomp
-}
+set.seed(1)
+ref <- logNormTransf(scuttle::mockSCE(ncells = 200, ngenes = 300))
+# Outside an interactive session, nfeat must be given.
+tuned <- tunePhiSpace(ref, assayName = "logcounts", phenotypes = "Cell_Cycle",
+                      ncompGrid = 1:4, nfeatV = c(20, 50), Kfolds = 3,
+                      nfeat = 50)
+tuned$ncomp
+tuned$tuneNcompErrs
 }

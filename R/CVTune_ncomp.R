@@ -15,6 +15,9 @@
 #' @param phenotypes Character.
 #' @param center Logic.
 #' @param scale Logic.
+#' @param ncomp Chosen number of components, or `NULL` to choose after the
+#'   cross-validation: in an interactive session the function plots the loss
+#'   and asks; otherwise it takes the grid value with the lowest loss.
 #'
 #' @return A list.
 #'
@@ -36,7 +39,8 @@ CVTune_ncomp <- function(reference,
                          regMethod = 'PCA',
                          labelCode = "-1,1",
                          Ncores = 1,
-                         seed = 5202056)
+                         seed = 5202056,
+                         ncomp = NULL)
 {
   ## Prepare predictor
   XX <- as.matrix(t(assay(reference, assayName)))
@@ -122,10 +126,18 @@ CVTune_ncomp <- function(reference,
     geom_point(mapping = aes(y = plot_dat$FrobRatio)) +
     ylab("Loss")
 
-  print(p)
+  if(interactive()) print(p)
 
-  ncomp <- readline("What is your choice of ncomp? ")
-  ncomp <- as.numeric(ncomp)
+  if(is.null(ncomp)){
+    if(interactive()){
+      ncomp <- as.numeric(readline("What is your choice of ncomp? "))
+    } else {
+      ncomp <- ncompGrid[which.min(errs)]
+      message("Chose ncomp = ", ncomp,
+              ", the grid value with the lowest cross-validation loss.")
+    }
+  }
+  .checkTunedValue(ncomp, "ncomp")
 
   return(
     list(

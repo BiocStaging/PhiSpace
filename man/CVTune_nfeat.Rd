@@ -20,7 +20,8 @@ CVTune_nfeat(
   regMethod = "PCA",
   labelCode = "-1,1",
   seed = 5202056,
-  Ncores = 1
+  Ncores = 1,
+  nfeat = NULL
 )
 }
 \arguments{
@@ -55,6 +56,10 @@ CVTune_nfeat(
 \item{seed}{Integer. The function sets the seed with \code{\link[withr:with_seed]{withr::local_seed()}}, so the session's random-number state is restored on exit.}
 
 \item{Ncores}{Integer.}
+
+\item{nfeat}{Chosen number of features per phenotype, or \code{NULL} to
+choose after the cross-validation. Only an interactive session can
+choose: the function plots the loss and asks.}
 }
 \value{
 A list.

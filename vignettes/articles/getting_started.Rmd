@@ -285,7 +285,7 @@ Next we use `PhiSpace::tunePhiSpace` to do a 5-fold CV grid search. The function
 if(F){ # If you want to run it, change F to T
   tuneRes <- tunePhiSpace(
     reference, assayName = "rank", phenotypes = phenotypes, 
-    tune_ncomp = TRUE, tune_nfeat = TRUE, ncomp = c(1,50), nfeatLimits = c(10, 5000),
+    tune_ncomp = TRUE, tune_nfeat = TRUE, ncompLimits = c(1,50), nfeatLimits = c(10, 5000),
     Ncores = 4, Kfolds = 5, seed = 5202056
   )
 }

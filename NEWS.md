@@ -71,6 +71,14 @@ PhiSpace 1.1.0, the release archived on Zenodo.
   (STexampleData) with single-cell RNA-seq of the cortex and hippocampus,
   and finds niches. The eight larger case studies are website articles in
   `vignettes/articles/` and are not part of the package.
+* `tunePhiSpace()` runs in non-interactive sessions. New arguments `ncomp`
+  (when `tune_ncomp = TRUE`) and `nfeat` give the values to use after the
+  cross-validation. If they are not given, an interactive session plots the
+  loss and asks, as before. A non-interactive session chooses the `ncomp`
+  with the lowest loss and needs `nfeat` when `tune_nfeat = TRUE`. Previous
+  versions always asked with `readline()`, which fails in a non-interactive
+  session, and ignored `ncomp` when `tune_ncomp = TRUE`. The loss plots are
+  now drawn only in interactive sessions.
 * New `logNormTransf()` divides counts by size factors (by default the
   library sizes, centred to mean 1) and takes `log2(x + 1)`. Its values are
   identical to those of `scuttle::logNormCounts()` with default arguments,

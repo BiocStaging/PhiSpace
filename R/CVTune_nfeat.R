@@ -16,6 +16,9 @@
 #' @param phenotypes Vector.
 #' @param center Logic.
 #' @param scale Logic.
+#' @param nfeat Chosen number of features per phenotype, or `NULL` to
+#'   choose after the cross-validation. Only an interactive session can
+#'   choose: the function plots the loss and asks.
 #'
 #' @return A list.
 #'
@@ -38,8 +41,11 @@ CVTune_nfeat <- function(reference,
                          regMethod = 'PCA',
                          labelCode = "-1,1",
                          seed = 5202056,
-                         Ncores = 1)
+                         Ncores = 1,
+                         nfeat = NULL)
 {
+  if(is.null(nfeat) && !interactive()) stop(.nfeatNeeded)
+
   ## Prepare response: dummy matrix
   if(is.null(YY)){
     if(is.null(phenotypes)) stop("Have to specify either YY or phenotypes.")
@@ -168,11 +174,13 @@ CVTune_nfeat <- function(reference,
     geom_point(mapping = aes(y = plot_dat$FrobRatio)) +
     ylab("Loss")
 
-  print(p)
+  if(interactive()) print(p)
 
   ## TODO: gap statistic for data-driven selection of nfeat
-  nfeat <- readline("What is your choice of nfeat? ")
-  nfeat <- as.numeric(nfeat)
+  if(is.null(nfeat)){
+    nfeat <- as.numeric(readline("What is your choice of nfeat? "))
+  }
+  .checkTunedValue(nfeat, "nfeat")
   selectedFeat <- selectFeat(impScores, nfeat)$selectedFeat
 
   return(
@@ -192,3 +200,15 @@ CVTune_nfeat <- function(reference,
 }
 
 
+
+.nfeatNeeded <- paste(
+  "Give nfeat: there is no rule to choose it from the cross-validation",
+  "loss, and a non-interactive session cannot ask for it."
+)
+
+.checkTunedValue <- function(x, name){
+  if(length(x) != 1 || is.na(x) || x < 1 || x != round(x)){
+    stop(name, " must be one positive whole number.")
+  }
+  invisible(x)
+}

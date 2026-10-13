@@ -1,15 +1,28 @@
-#' Title
+#' Tune ncomp and nfeat by cross-validation
+#'
+#' Computes the K-fold cross-validation loss of a PhiSpace model over a grid
+#' of numbers of components (`ncomp`) and then over a grid of numbers of
+#' features per phenotype (`nfeat`), and returns the chosen values with the
+#' selected features. In an interactive session the function plots each loss
+#' curve and asks for a value unless `ncomp` or `nfeat` is given. In a
+#' non-interactive session it chooses the `ncomp` with the lowest loss, and
+#' `nfeat` must be given when `tune_nfeat = TRUE`.
 #'
 #' @param reference `SingleCellExperiment` object.
 #' @param assayName Character.
 #' @param phenotypes Character.
 #' @param YY Matrix.
-#' @param ncomp Integer.
+#' @param ncomp Integer. With `tune_ncomp = TRUE`, the value to use after the
+#'   cross-validation instead of asking or taking the lowest loss. With
+#'   `tune_ncomp = FALSE`, the value to use; `NULL` uses the number of
+#'   columns of `YY`.
 #' @param impScores Matrix.
 #' @param center Logical.
 #' @param scale Logical.
-#' @param tune_ncomp Logic.
-#' @param tune_nfeat Logic.
+#' @param tune_ncomp Logical: compute the cross-validation loss for each
+#'   value in the ncomp grid.
+#' @param tune_nfeat Logical: compute the cross-validation loss for each
+#'   value in the nfeat grid.
 #' @param ncompLimits Vector.
 #' @param ncompGridSize Integer.
 #' @param ncompGrid Vector.
@@ -22,19 +35,24 @@
 #' @param labelCode Character.
 #' @param Ncores Integer.
 #' @param seed Integer. The function sets the seed with [withr::local_seed()], so the session's random-number state is restored on exit.
+#' @param nfeat Integer. With `tune_nfeat = TRUE`, the number of features
+#'   per phenotype to use after the cross-validation instead of asking;
+#'   required in a non-interactive session.
 #' @param cellTypeThreshold Integer or NULL. If a positive integer, cell types with fewer than this many cells in the reference will be removed before tuning. Only used when `phenotypes` is provided. Default is `NULL` (no filtering).
 #'
-#' @return A list
+#' @return A list with `ncomp`, `nfeat`, `impScores` (feature importance
+#'   scores), `selectedFeat` (selected features), and `tuneNcompErrs` and
+#'   `tuneNfeatErrs` (data frames of the cross-validation loss for each grid
+#'   value, or `NULL` when that parameter was not tuned).
 #' @examples
-#' # tunePhiSpace() plots the cross-validation errors and asks for a choice of
-#' # ncomp and nfeat, so it runs only in an interactive session.
-#' if (interactive()) {
-#'   set.seed(1)
-#'   ref <- logNormTransf(scuttle::mockSCE(ncells = 200, ngenes = 300))
-#'   tuned <- tunePhiSpace(ref, assayName = "logcounts", phenotypes = "Cell_Cycle",
-#'                         ncompGrid = 1:4, nfeatV = c(20, 50), Kfolds = 3)
-#'   tuned$ncomp
-#' }
+#' set.seed(1)
+#' ref <- logNormTransf(scuttle::mockSCE(ncells = 200, ngenes = 300))
+#' # Outside an interactive session, nfeat must be given.
+#' tuned <- tunePhiSpace(ref, assayName = "logcounts", phenotypes = "Cell_Cycle",
+#'                       ncompGrid = 1:4, nfeatV = c(20, 50), Kfolds = 3,
+#'                       nfeat = 50)
+#' tuned$ncomp
+#' tuned$tuneNcompErrs
 #' @export
 tunePhiSpace <- function(reference,
                          assayName = "logcounts",
@@ -63,7 +81,10 @@ tunePhiSpace <- function(reference,
                          labelCode = "-1,1",
                          Ncores = 1,
                          seed = 5202056,
-                         cellTypeThreshold = NULL){
+                         cellTypeThreshold = NULL,
+                         nfeat = NULL){
+
+  if(tune_nfeat && is.null(nfeat) && !interactive()) stop(.nfeatNeeded)
 
   # Validate cellTypeThreshold
   if(!is.null(cellTypeThreshold)){
@@ -111,7 +132,8 @@ tunePhiSpace <- function(reference,
                                    regMethod = regMethod,
                                    labelCode = labelCode,
                                    Ncores = Ncores,
-                                   seed = seed)
+                                   seed = seed,
+                                   ncomp = ncomp)
     ncomp <- tune_ncomp_res$ncomp
     tuneNcompErrs <- tune_ncomp_res$tuneNcompErrs
   } else {
@@ -151,7 +173,8 @@ tunePhiSpace <- function(reference,
                                    regMethod = regMethod,
                                    labelCode = labelCode,
                                    seed = seed,
-                                   Ncores = Ncores)
+                                   Ncores = Ncores,
+                                   nfeat = nfeat)
     nfeat <- tune_nfeat_res$nfeat
     tuneNfeatErrs <- tune_nfeat_res$tuneNfeatErrs
     impScores <- tune_nfeat_res$impScores
