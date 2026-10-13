@@ -338,6 +338,12 @@ Done on 2026-10-07 with this procedure:
   files. The local copies were deleted in the local clean-up; the old `.qs`
   originals are no longer kept anywhere.
 
+- CITE (2026-10-13, user-approved): `majorCellTypes.R`, which the CITE-seq
+  article sources, called `getClass()`, renamed `getLabels()` in `43faaef`.
+  Line 1 now calls `getLabels()`; the old file is in
+  `VignetteData_backups/CITE-2026-10-13/`. Dropbox hashes match, and the
+  public folder download passes the new manifest (12 files).
+
 - Stereo-seq: `output/PhiRes.qs2`, `PhiClustRes.qs2` and `cloneKDEres.qs2`
   replaced by the files in `PkgOverhaul/data/StereoSeq/replacement-2026-10-06/`;
   the old files are in `VignetteData_backups/StereoSeq-2026-10-06/output/`.
