@@ -30,8 +30,9 @@ svdspc.fit <- function (X, Y, ncomp, center = TRUE, scale = FALSE, sparse = FALS
 
     if(ncomp < 0.5 * min(nobj, npred)){
 
-      # irlba centres and scales a sparse X implicitly
-      huhn <- suppressWarnings(irlba::irlba(X, nv = ncomp, center = Xmeans, scale = Xscals))
+      # irlba centres and scales a sparse X implicitly. Below this ncomp its
+      # only warning is non-convergence, which users should see.
+      huhn <- irlba::irlba(X, nv = ncomp, center = Xmeans, scale = Xscals)
     } else {
 
       # irlba is not accurate for most of the singular values. Here one

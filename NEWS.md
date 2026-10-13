@@ -258,6 +258,9 @@ PhiSpace 1.1.0, the release archived on Zenodo.
   `citation("PhiSpace")` returns both. The README files, `DESCRIPTION`, the
   `PhiSpace()` and `PhiSpaceR_1ref()` help pages and the vignettes no longer
   link to the bioRxiv preprints.
+* `mvr(method = "PCA")` no longer hides irlba's warnings. With the full
+  singular value decomposition used for large `ncomp`, the only warning left
+  is that irlba did not converge.
 * The `License` field changed from `AGPL (>= 3)` to `AGPL-3`.
 * Raw scores from `phenotype()` (for example `PhiSpaceScore` and `YrefHat`)
   no longer carry a `"scaled:center"` attribute.
